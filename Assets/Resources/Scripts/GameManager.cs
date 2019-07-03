@@ -21,17 +21,26 @@ public class GameManager : MonoBehaviour {
     public int remaining_invulnarebility;
     //public GameObject startbutton;
 
+    private GameObject idleText;
+
     public ShowSplashImageCanvas splashgroup;
 
     void Awake() {
         scoreTxt = FindObjectOfType<ScoreScript>();
         button1 = FindObjectOfType<StartButton>();
         headlineTxt = FindObjectOfType<headlineTxt>();
+       
         
     }
 	// Use this for initialization
 	void Start () {
-        //newGame();
+        if (!runningGame)
+        {
+            extralives.text="";
+            headlineTxt.changeState(false);
+            idleText = GameObject.Find("IdleText");
+            idleText.gameObject.SetActive(true);
+        }
 	}
 	
 	// Update is called once per frame
@@ -52,6 +61,9 @@ public class GameManager : MonoBehaviour {
     public void newGame(){
         Debug.Log("New Game(Manager)");
         headlineTxt.changeState(false);
+        // dont display the header animation when game is started
+        idleText = GameObject.Find("IdleText");
+        idleText.gameObject.SetActive(false);
         FindObjectOfType<FruitSpawn>().newGame();
         addScore(-score);
         turn = 0;
@@ -61,7 +73,6 @@ public class GameManager : MonoBehaviour {
         runningGame = true;
         Time.timeScale = 1;
         splashgroup.hideAllSplashImage();
-
     }
     public void addScore(int i){
         score += i;

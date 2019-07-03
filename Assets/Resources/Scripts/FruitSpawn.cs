@@ -66,7 +66,6 @@ public class FruitSpawn : MonoBehaviour {
         spawnslotused[2] = 0;
         spawnslotused[3] = 0;
         //spawnslotused[4] = 0;
-        int blocksspawned = 0;
 
         GameObject activeFruit;
 

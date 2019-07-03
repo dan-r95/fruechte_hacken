@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour {
         headlineTxt.changeState(false);
         // dont display the header animation when game is started
         idleText = GameObject.Find("IdleText");
-        idleText.gameObject.SetActive(false);
+        idleText.SetActive(false);
         FindObjectOfType<FruitSpawn>().newGame();
         addScore(-score);
         turn = 0;

@@ -11,12 +11,6 @@ public class StartButton : MonoBehaviour {
 	void Start () {
         manager = FindObjectOfType<GameManager>();
 	}
-	
-	// Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void OnCollisionEnter(Collision collisionInfo)
     {

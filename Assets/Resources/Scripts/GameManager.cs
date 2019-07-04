@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour {
     public int remaining_invulnarebility;
     //public GameObject startbutton;
 
-    private GameObject idleText;
+    private GameObject idleText, gameOverText;
 
     public ShowSplashImageCanvas splashgroup;
 
@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour {
             headlineTxt.changeState(false);
             idleText = GameObject.Find("IdleText");
             idleText.gameObject.SetActive(true);
+            gameOverText = GameObject.Find("gameOverText");
+            gameOverText.gameObject.SetActive(false);
         }
 	}
 	
@@ -55,7 +57,7 @@ public class GameManager : MonoBehaviour {
         if (remaining_invulnarebility > 0)
             remaining_invulnarebility--;
         if(runningGame)
-            Time.timeScale += 0.0001f; //speeding up the game
+            Time.timeScale += 0.00001f; //speeding up the game
 	}
 
     public void newGame(){

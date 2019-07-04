@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ShowSplashImageCanvas : MonoBehaviour
 {
     public Image image1, image2, image3, image4, image5, image6, image7, image8, image9, image10;
-
+    private GameObject gameOverText;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,10 +57,13 @@ public class ShowSplashImageCanvas : MonoBehaviour
                 image8.enabled = true;
                 break;
             case 9:
-                image8.enabled = true;
+                image9.enabled = true;
                 break;
             case 10:
-                image10.enabled = true;
+                Debug.Log("10");
+                gameOverText = GameObject.Find("gameOverText");
+                gameOverText.gameObject.SetActive(true);
+                image10.enabled = true;        
                 break;
             default:
                 break;

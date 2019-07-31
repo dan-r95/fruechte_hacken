@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour {
 
     public ShowSplashImageCanvas splashgroup;
 
+    public float timeLeft= 90f;
+
     void Awake() {
         scoreTxt = FindObjectOfType<ScoreScript>();
         button1 = FindObjectOfType<StartButton>();

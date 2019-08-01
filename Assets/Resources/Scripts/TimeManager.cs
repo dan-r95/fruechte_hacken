@@ -1,19 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using System.Threading;
 
 public class TimeManager : MonoBehaviour
 {
     GameManager manager;
-    Text timeText;
+    public Text timeText;
     System.Timers.Timer LeTimer;
     public float timeLeft = 100f;
-    public int BoomDown = 100;
+
+    public GameObject timeLeftText;
+
     void Start()
     {
-        timeText = GetComponent<Text>();
+
+    }
+    public void startTimer()
+    {
+        timeLeftText.SetActive(true);
         //Initialize timer with 1 second intervals
-        StartCoroutine(Example());
+        StartCoroutine(CountDownToZero());
         Time.timeScale = 1; //Just making sure that the timeScale is right
 
     }
@@ -21,29 +29,27 @@ public class TimeManager : MonoBehaviour
 
 
 
-    IEnumerator Example()
+    IEnumerator CountDownToZero()
     {
-        yield return new WaitForSeconds(1);
-        timeLeft--;
-        if (timeLeft == 0)
+        while (true)
         {
-            Debug.Log("GameOver!");
-            yield break;
-        }
+            yield return new WaitForSeconds(1);
+            timeLeft--;
+            if (timeLeft == 0)
+            {
+                FindObjectOfType<GameManager>().EndGame();
+                yield break;
+            }
 
+        }
     }
 
     void Update()
     {
-        setTimeText(timeLeft);
-
-
-
-
-
-
-
-
+        if (timeLeftText.activeSelf)
+        {
+            setTimeText(timeLeft);
+        }
     }
     public void setTimeText(float time)
     {

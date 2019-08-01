@@ -21,11 +21,9 @@ public class GameManager : MonoBehaviour {
     public int remaining_invulnarebility;
     //public GameObject startbutton;
 
-    private GameObject idleText, gameOverText;
+    public GameObject idleText, gameOverText;
 
     public ShowSplashImageCanvas splashgroup;
-
-    public float timeLeft= 90f;
 
     void Awake() {
         scoreTxt = FindObjectOfType<ScoreScript>();
@@ -64,6 +62,8 @@ public class GameManager : MonoBehaviour {
 
     public void newGame(){
         Debug.Log("New Game(Manager)");
+        // start the counter
+        FindObjectOfType<TimeManager>().startTimer();
         headlineTxt.changeState(false);
         // dont display the header animation when game is started
         idleText = GameObject.Find("IdleText");
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour {
     }
 
 
-    public bool checkforitem()
+    public bool checkforItem()
     {
         //  Zusammenfassung:
         //Returns true, if there is an item going to be spawned
@@ -135,6 +135,6 @@ public class GameManager : MonoBehaviour {
         runningGame = false;
         headlineTxt.changeState(true);
         button1.transform.position = new Vector3(0.5f, 1.5f, -1.75f);
-
+        gameOverText.SetActive(true);
     }
 }

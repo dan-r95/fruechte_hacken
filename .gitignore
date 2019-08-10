@@ -14,7 +14,7 @@
 # /[Aa]ssets/AssetStoreTools*
 
 # TextMesh Pro files
-[Aa]ssets/TextMesh*Pro/
+[Aa]ssets/TextMesh*Pro/gameObject
 
 # Visual Studio cache directory
 .vs/
@@ -55,3 +55,8 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+#VS Code
+.vscode/
+
+DodgeTheBock_Data/
+Mono/

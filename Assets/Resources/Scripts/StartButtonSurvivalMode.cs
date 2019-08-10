@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class StartButton : MonoBehaviour {
+public class StartButtonSurvivalMode : MonoBehaviour {
 
     public Vector3 posAdd;
 
@@ -16,7 +15,7 @@ public class StartButton : MonoBehaviour {
     {
         if (collisionInfo.collider.tag == "Player")
         {
-            manager.newGame();
+            SceneManager.LoadScene("SurvivalMode");
         }
     }
 }

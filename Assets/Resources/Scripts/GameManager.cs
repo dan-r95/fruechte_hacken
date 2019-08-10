@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour {
     headlineTxt headlineTxt;
     public Text extralives;
     public Text textinvulnarebility;
-    StartButton button1;
+    StartButtonTimeMode button1;
+    StartButtonSurvivalMode button2;
     public Random rng;
     public int extralife;
     public int remaining_invulnarebility;
@@ -27,7 +28,8 @@ public class GameManager : MonoBehaviour {
 
     void Awake() {
         scoreTxt = FindObjectOfType<ScoreScript>();
-        button1 = FindObjectOfType<StartButton>();
+        button1 = FindObjectOfType<StartButtonTimeMode>();
+        button2 = FindObjectOfType<StartButtonSurvivalMode>();
         headlineTxt = FindObjectOfType<headlineTxt>();
        
         
@@ -36,12 +38,12 @@ public class GameManager : MonoBehaviour {
 	void Start () {
         if (!runningGame)
         {
-            extralives.text="";
-            headlineTxt.changeState(false);
+            //extralives.text="";
+            //headlineTxt.changeState(false);
             idleText = GameObject.Find("IdleText");
             idleText.gameObject.SetActive(true);
-            gameOverText = GameObject.Find("gameOverText");
-            gameOverText.gameObject.SetActive(false);
+            //gameOverText = GameObject.Find("gameOverText");
+            //gameOverText.gameObject.SetActive(false);
         }
 	}
 	
@@ -136,5 +138,7 @@ public class GameManager : MonoBehaviour {
         headlineTxt.changeState(true);
         button1.transform.position = new Vector3(0.5f, 1.5f, -1.75f);
         gameOverText.SetActive(true);
+        // add button to get back to the main menu
+        //SceneManager.LoadScene("Main Menu");
     }
 }

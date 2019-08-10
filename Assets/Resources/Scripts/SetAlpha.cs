@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class setAlpha : MonoBehaviour
+public class SetAlpha : MonoBehaviour
 {
     Image image;
     public float alpha=  0.9f;

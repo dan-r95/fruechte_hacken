@@ -27,8 +27,17 @@ public class SequentialAnimator : MonoBehaviour
     void Start()
     {
         UpdateAnimatorList();
-
         StartCoroutine(Play());
+    }
+
+
+    void OnEnable(){
+        UpdateAnimatorList();
+        StartCoroutine(Play());
+    }
+
+     void OnDisable() {
+        StopCoroutine(Play());
     }
 
     public IEnumerator Play()

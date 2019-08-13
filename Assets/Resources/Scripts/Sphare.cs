@@ -1,24 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+using UnityEngine.Audio;
 
-
-public class Sphare : MonoBehaviour {
+public class Sphare : MonoBehaviour
+{
 
     Rigidbody rb;
     ConstantForce cf;
     GameManager manager;
+    AudioManager audioManager;
     public GameObject fracturedFruit;
     ShowSplashImageCanvas splashimage;
 
-    void Start() {
+
+
+    void Start()
+    {
         rb = GetComponent<Rigidbody>();
         cf = GetComponent<ConstantForce>();
         //Debug.Log(rb);
-        rb.AddForce(10f,0,0);
+        rb.AddForce(10f, 0, 0);
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         if (manager == null)
             manager = FindObjectOfType<GameManager>();
 
@@ -81,12 +88,15 @@ public class Sphare : MonoBehaviour {
     public void OnCollisionEnter(Collision collisionInfo)
     {
         if (collisionInfo.collider.tag == "Player")
-        {   
+        {
             GameObject fractObj = Instantiate(fracturedFruit, gameObject.transform.position, Quaternion.identity) as GameObject;
             Destroy(gameObject);
             fractObj.GetComponent<ExplodeFruitsScript>().ExplodeFruits();
             manager.addScore(1);
+            // play splash music - randomly one of 2 sounds
+            audioManager = FindObjectOfType<AudioManager>();
+            audioManager.playSplash();
         }
-        
+
     }
 }

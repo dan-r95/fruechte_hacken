@@ -21,8 +21,9 @@ public class TimeManager : MonoBehaviour
     {
         timeLeftText.SetActive(true);
         //Initialize timer with 1 second intervals
-        StartCoroutine(CountDownToZero());
         Time.timeScale = 1; //Just making sure that the timeScale is right
+        StartCoroutine(CountDownToZero());
+        
 
     }
 

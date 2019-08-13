@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class FruitSpawn : MonoBehaviour {
+public class FruitSpawn : MonoBehaviour
+{
 
     public Transform[] spawnPoint;
     List<GameObject> fruits = new List<GameObject>();
@@ -20,9 +21,10 @@ public class FruitSpawn : MonoBehaviour {
     GameManager manager;
     bool[] spawnslotused;
     Vector3 spawnpos;
-    
 
-	void Start () {
+
+    void Start()
+    {
         manager = FindObjectOfType<GameManager>();
         waveTime = startWaveTime;
         startTime = Time.time;
@@ -34,8 +36,8 @@ public class FruitSpawn : MonoBehaviour {
         fruits.Add(orange);
         fruits.Add(peach);
     }
-	
-	// Update is called once per frame
+
+    // Update is called once per frame
     void FixedUpdate()
     {
         if (manager.runningGame)
@@ -47,22 +49,24 @@ public class FruitSpawn : MonoBehaviour {
                 Time.timeScale += timeincrease;
             }
         }
-	}
+    }
 
-    public void newGame() {
+    public void newGame()
+    {
+        Debug.Log("Fruit Spawn New Game");
         FindObjectOfType<FruitSpawn>().startTime = Time.time; // equal to this.startTime = Time.time?
         waveTime = startWaveTime;
         spawnTime = 0f;
         startTime = Time.time;
     }
 
-    
+
 
     void SpawnColliders()
     {
         int[] spawnslotused = new int[4];
-        spawnslotused[0] = 0; 
-        spawnslotused[1] = 0; 
+        spawnslotused[0] = 0;
+        spawnslotused[1] = 0;
         spawnslotused[2] = 0;
         spawnslotused[3] = 0;
         //spawnslotused[4] = 0;

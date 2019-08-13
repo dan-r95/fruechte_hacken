@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
-	public float speed = 1f;
-	private float startTime, journeyLength;
+    public float speed = 1f;
+    private float startTime, journeyLength;
     public bool runningGame = false;
     public bool noclip = false;
     public int score = 0;
@@ -26,16 +27,23 @@ public class GameManager : MonoBehaviour {
 
     public ShowSplashImageCanvas splashgroup;
 
-    void Awake() {
+    void Awake()
+    {
         scoreTxt = FindObjectOfType<ScoreScript>();
         button1 = FindObjectOfType<StartButtonTimeMode>();
         button2 = FindObjectOfType<StartButtonSurvivalMode>();
         headlineTxt = FindObjectOfType<headlineTxt>();
-       
-        
+        // QualitySettings.vSyncCount = 1;
+        Application.targetFrameRate = 300;
+
     }
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
+
+        // Sync framerate to monitors refresh rate
+
+
         if (!runningGame)
         {
             //extralives.text="";
@@ -45,42 +53,45 @@ public class GameManager : MonoBehaviour {
             //gameOverText = GameObject.Find("gameOverText");
             //gameOverText.gameObject.SetActive(false);
         }
-	}
-	
-	// Update is called once per frame
+    }
+
+    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T)){
+        if (Input.GetKeyDown(KeyCode.T))
+        {
             noclip = !noclip;
         }
-        if(Input.GetKey(KeyCode.N) && !runningGame)
-            newGame();            
+        if (Input.GetKey(KeyCode.N) && !runningGame)
+            newGame();
 
         if (remaining_invulnarebility > 0)
             remaining_invulnarebility--;
-        if(runningGame)
+        if (runningGame)
             Time.timeScale += 0.00001f; //speeding up the game
-	}
+    }
 
-    public void newGame(){
+    public void newGame()
+    {
         Debug.Log("New Game(Manager)");
         // start the counter
         FindObjectOfType<TimeManager>().startTimer();
         headlineTxt.changeState(false);
         // dont display the header animation when game is started
         idleText = GameObject.Find("IdleText");
-        idleText.SetActive(false);
+        // idleText.gameObject.SetActive(false);
         FindObjectOfType<FruitSpawn>().newGame();
         addScore(-score);
         turn = 0;
         extralife = 0;
         setExtralife(10);
-        button1.transform.position = new Vector3(0.5f, 1.5f, -5f);
+        //button1.transform.position = new Vector3(0.5f, 1.5f, -5f);
         runningGame = true;
         Time.timeScale = 1;
         splashgroup.hideAllSplashImage();
     }
-    public void addScore(int i){
+    public void addScore(int i)
+    {
         score += i;
         scoreTxt.setScore(score);
     }
@@ -125,18 +136,21 @@ public class GameManager : MonoBehaviour {
         return 0.4f;
     }
 
-    public void increaseInvulnarebility(int i) {
+    public void increaseInvulnarebility(int i)
+    {
         remaining_invulnarebility += i;
     }
 
-    public void setInvulnarebility(int i){
+    public void setInvulnarebility(int i)
+    {
         remaining_invulnarebility = i;
     }
 
-    public void EndGame() {
+    public void EndGame()
+    {
         runningGame = false;
         headlineTxt.changeState(true);
-        button1.transform.position = new Vector3(0.5f, 1.5f, -1.75f);
+        //button1.transform.position = new Vector3(0.5f, 1.5f, -1.75f);
         gameOverText.SetActive(true);
         // add button to get back to the main menu
         //SceneManager.LoadScene("Main Menu");

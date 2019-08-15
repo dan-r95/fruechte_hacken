@@ -6,9 +6,9 @@ public class StartButtonSurvivalMode : MonoBehaviour {
     public Vector3 posAdd;
 
 	// Use this for initialization
-    GameManager manager;
+    GameManagerSurvival manager;
 	void Start () {
-        manager = FindObjectOfType<GameManager>();
+        manager = FindObjectOfType<GameManagerSurvival>();
 	}
 
     public void OnCollisionEnter(Collision collisionInfo)

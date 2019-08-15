@@ -7,93 +7,101 @@ using System.IO;
 
 public class MoCapAnsteuerung : MonoBehaviour
 {
-	public static Matrix4x4[] matrix = new Matrix4x4[21]; //Knochenmatrizen aus MoCap abspeichern
-	private Transform[] bones;
-	private GameObject[] sphere; //Sphären um Knochenpositionen anzuzeigen
-	private	static UdpReader reader;
-	private OscBundle bundle;
-	//Handmesh bei Fernglas an und Ausschalten
-	public SkinnedMeshRenderer[] hands;
+    public static Matrix4x4[] matrix = new Matrix4x4[21]; //Knochenmatrizen aus MoCap abspeichern
+    private Transform[] bones;
+    private GameObject[] sphere; //Sphären um Knochenpositionen anzuzeigen
+    private static UdpReader reader;
+    private OscBundle bundle;
+    //Handmesh bei Fernglas an und Ausschalten
+    public SkinnedMeshRenderer[] hands;
     public GameManager manager;
-	private bool mocap, mocapcontrolling;
-	private float[] skeleton;
-	public float handabstand, handlinks, handrechts = 0;
-	public Transform _00UpperChest;
-	public Transform _01MidTorso;
-	public Transform _02LowerTorso;
-	public Transform _03LeftUpperLeg;
-	public Transform _04LeftLowerLeg;
-	public Transform _05LeftFoot;
-	public Transform _06RightUpperLeg;
-	public Transform _07RightLowerLeg;
-	public Transform _08RightFoot;
-	public Transform _09Neck;
-	public Transform _10Head;
-	public Transform _11RightClavicle;
-	public Transform _12RightShoulder;
-	public Transform _13RightUpperArm;
-	public Transform _14RightLowerArm;
-	public Transform _15RightHand;
-	public Transform _16LeftClavicle;
-	public Transform _17LeftShoulder;
-	public Transform _18LeftUpperArm;
-	public Transform _19LeftLowerArm;
-	public Transform _20LeftHand;
-	public float maxFernglas = 0.3f;
+    private bool mocap, mocapcontrolling;
+    private float[] skeleton;
+    public float handabstand, handlinks, handrechts = 0;
+    public Transform _00UpperChest;
+    public Transform _01MidTorso;
+    public Transform _02LowerTorso;
+    public Transform _03LeftUpperLeg;
+    public Transform _04LeftLowerLeg;
+    public Transform _05LeftFoot;
+    public Transform _06RightUpperLeg;
+    public Transform _07RightLowerLeg;
+    public Transform _08RightFoot;
+    public Transform _09Neck;
+    public Transform _10Head;
+    public Transform _11RightClavicle;
+    public Transform _12RightShoulder;
+    public Transform _13RightUpperArm;
+    public Transform _14RightLowerArm;
+    public Transform _15RightHand;
+    public Transform _16LeftClavicle;
+    public Transform _17LeftShoulder;
+    public Transform _18LeftUpperArm;
+    public Transform _19LeftLowerArm;
+    public Transform _20LeftHand;
+    public float maxFernglas = 0.3f;
     public float maxclap = 0.3f;
-	public static bool glas;
-	private Vector3 initPosition = Vector3.zero;
-	private Transform AvatarRoot;
+    public static bool glas;
+    private Vector3 initPosition = Vector3.zero;
+    private Transform AvatarRoot;
     private int posenumber = 0, previouspose = 0;
 
-	public void Awake ()
-	{
-		bones = new Transform[21];
-		
-		bones [0] = _00UpperChest;
-		bones [1] = _01MidTorso;
-		bones [2] = _02LowerTorso;
-		bones [3] = _03LeftUpperLeg;
-		bones [4] = _04LeftLowerLeg;
-		bones [5] = _05LeftFoot;
-		bones [6] = _06RightUpperLeg;
-		bones [7] = _07RightLowerLeg;
-		bones [8] = _08RightFoot;
-		bones [9] = _09Neck;
-		bones [10] = _10Head;
-		bones [11] = _11RightClavicle;
-		bones [12] = _12RightShoulder;
-		bones [13] = _13RightUpperArm;
-		bones [14] = _14RightLowerArm;
-		bones [15] = _15RightHand;
-		bones [16] = _16LeftClavicle;
-		bones [17] = _17LeftShoulder;
-		bones [18] = _18LeftUpperArm;
-		bones [19] = _19LeftLowerArm;
-		bones [20] = _20LeftHand;
-	}
-	
-	void Start ()
-	{
-		if(reader == null)
-		reader = new UdpReader (4000);
-		sphere = new GameObject[21];
-		skeleton = new float[336];
-		AvatarRoot = GameObject.FindGameObjectWithTag("AvatarRoot").transform;
-		for (int i = 0; i < 21; i++){
-			if(i == 5 || i == 8 || i == 10 || i == 15 || i == 20)
-				sphere[i] = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/SphereCollider"), new Vector3(0f,0f,0f),Quaternion.identity); //Sphären Instanzieren und Erstellen
-			else
-				sphere[i] = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Sphere"), new Vector3(0f,0f,0f),Quaternion.identity); //Sphären Instanzieren und Erstellen
-			sphere[i].transform.parent = AvatarRoot;
-		}
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-        
-		/*	BoneInfos
+    private GameObject hat;
+
+    public void Awake()
+    {
+        bones = new Transform[21];
+
+        bones[0] = _00UpperChest;
+        bones[1] = _01MidTorso;
+        bones[2] = _02LowerTorso;
+        bones[3] = _03LeftUpperLeg;
+        bones[4] = _04LeftLowerLeg;
+        bones[5] = _05LeftFoot;
+        bones[6] = _06RightUpperLeg;
+        bones[7] = _07RightLowerLeg;
+        bones[8] = _08RightFoot;
+        bones[9] = _09Neck;
+        bones[10] = _10Head;
+        bones[11] = _11RightClavicle;
+        bones[12] = _12RightShoulder;
+        bones[13] = _13RightUpperArm;
+        bones[14] = _14RightLowerArm;
+        bones[15] = _15RightHand;
+        bones[16] = _16LeftClavicle;
+        bones[17] = _17LeftShoulder;
+        bones[18] = _18LeftUpperArm;
+        bones[19] = _19LeftLowerArm;
+        bones[20] = _20LeftHand;
+    }
+
+    void Start()
+    {
+        if (reader == null)
+            reader = new UdpReader(4000);
+        sphere = new GameObject[21];
+        skeleton = new float[336];
+        AvatarRoot = GameObject.FindGameObjectWithTag("AvatarRoot").transform;
+        for (int i = 0; i < 21; i++)
+        {
+            if (i == 5 || i == 8 || i == 10 || i == 15 || i == 20)
+                sphere[i] = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/SphereCollider"), new Vector3(0f, 0f, 0f), Quaternion.identity); //Sphären Instanzieren und Erstellen
+            else
+                sphere[i] = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Sphere"), new Vector3(0f, 0f, 0f), Quaternion.identity); //Sphären Instanzieren und Erstellen
+            sphere[i].transform.parent = AvatarRoot;
+            if (i == 10)
+            {
+                hat = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/hat Variant"), sphere[10].transform.localPosition, Quaternion.identity); //Sphären Instanzieren und Erstellen
+            }
+            Debug.Log(skeleton[10]);
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        /*	BoneInfos
 		Index	Bone Name		Position in Hierarchy
 		0		Upper Chest 	Root
 		1		Mid Torso		Child of Upper Chest
@@ -117,13 +125,13 @@ public class MoCapAnsteuerung : MonoBehaviour
 		19		Left Lower Arm	Child of Left Upper Arm
 		20		Left Hand		Child of Left Lower Arm
 		*/
-		
-		#region MoCap Ansteuerung
-		if (reader != null)
-			bundle = (OscBundle)reader.Receive (); //Aktuelle MoCap Position empfangen
-        
+
+        #region MoCap Ansteuerung
+        if (reader != null)
+            bundle = (OscBundle)reader.Receive(); //Aktuelle MoCap Position empfangen
+
         bundle = null; //for testing not connected environment
-        
+
         if (bundle != null)
         {
             int i = 0;
@@ -141,35 +149,35 @@ public class MoCapAnsteuerung : MonoBehaviour
                 saveSkeleton("pose1");
             }
 
-			#region Saving Multiple Positions
+            #region Saving Multiple Positions
 
-			if (Input.GetKeyDown(KeyCode.F2))
+            if (Input.GetKeyDown(KeyCode.F2))
             {
                 saveSkeleton("pose2");
             }
-			if (Input.GetKeyDown(KeyCode.F3))
-			{
-				saveSkeleton("pose3");
-			}
-			if (Input.GetKeyDown(KeyCode.F4))
-			{
-				saveSkeleton("pose4");
-			}
-			if (Input.GetKeyDown(KeyCode.F5))
-			{
-				saveSkeleton("pose5");
-			}
-			if (Input.GetKeyDown(KeyCode.F6))
-			{
-				saveSkeleton("pose6");
-			}
-			if (Input.GetKeyDown(KeyCode.F7))
-			{
-				saveSkeleton("pose7");
-			}
-			if (Input.GetKeyDown(KeyCode.F8))
-			{
-				saveSkeleton("pose8");
+            if (Input.GetKeyDown(KeyCode.F3))
+            {
+                saveSkeleton("pose3");
+            }
+            if (Input.GetKeyDown(KeyCode.F4))
+            {
+                saveSkeleton("pose4");
+            }
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                saveSkeleton("pose5");
+            }
+            if (Input.GetKeyDown(KeyCode.F6))
+            {
+                saveSkeleton("pose6");
+            }
+            if (Input.GetKeyDown(KeyCode.F7))
+            {
+                saveSkeleton("pose7");
+            }
+            if (Input.GetKeyDown(KeyCode.F8))
+            {
+                saveSkeleton("pose8");
             }
             if (Input.GetKeyDown(KeyCode.F9))
             {
@@ -178,9 +186,9 @@ public class MoCapAnsteuerung : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F10))
             {
                 saveSkeleton("pose10");
-            }							
-			
-			#endregion
+            }
+
+            #endregion
 
             mocap = true;
             mocapcontrolling = false;
@@ -190,12 +198,12 @@ public class MoCapAnsteuerung : MonoBehaviour
             //Load for once if no bundle found
             //if successfull, set mocap true, else quit
 
-            if(posenumber == 0) //no pose has been set yet
+            if (posenumber == 0) //no pose has been set yet
             {
                 mocap = loadSkeleton(skeleton, "pose6");
                 posenumber = 6;
             }
-            
+
             #region LoadPoses
 
             if (Input.GetKeyDown(KeyCode.Alpha1) && posenumber != 1)
@@ -217,7 +225,7 @@ public class MoCapAnsteuerung : MonoBehaviour
             {
                 mocap = loadSkeleton(skeleton, "pose4");
                 posenumber = 4;
-            } 
+            }
             if (Input.GetKeyDown(KeyCode.Alpha5) && posenumber != 5)
             {
                 mocap = loadSkeleton(skeleton, "pose5");
@@ -227,7 +235,7 @@ public class MoCapAnsteuerung : MonoBehaviour
             {
                 mocap = loadSkeleton(skeleton, "pose6");
                 posenumber = 6;
-            } 
+            }
             if (Input.GetKeyDown(KeyCode.Alpha7) && posenumber != 7)
             {
                 mocap = loadSkeleton(skeleton, "pose7");
@@ -264,59 +272,67 @@ public class MoCapAnsteuerung : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.C))
             {
                 mocap = loadSkeleton(skeleton, "pose" + previouspose);
-                posenumber = previouspose;    
+                posenumber = previouspose;
             }
+
+            // set hat to specific position and rotation
+            Vector3 pos = new Vector3( sphere[10].transform.position.x,  sphere[10].transform.position.y - 0.18f,  sphere[10].transform.position.z);
+            hat.transform.position = pos;
+            hat.transform.rotation = sphere[9].transform.localRotation;
         }
-		
 
-        if (mocap) {
-		
+
+        if (mocap)
+        {
+
             //Speichern in Matrizen zur Weiterverarbeitung
-			int x = 0;
-			for (int anz = 0; anz <21; anz++) {
-				matrix [anz].m00 = skeleton [x++];
-				matrix [anz].m01 = skeleton [x++];
-				matrix [anz].m02 = skeleton [x++];
-				matrix [anz].m03 = skeleton [x++];
-				matrix [anz].m10 = skeleton [x++];
-				matrix [anz].m11 = skeleton [x++];
-				matrix [anz].m12 = skeleton [x++];
-				matrix [anz].m13 = skeleton [x++];
-				matrix [anz].m20 = skeleton [x++];
-				matrix [anz].m21 = skeleton [x++];
-				matrix [anz].m22 = skeleton [x++];
-				matrix [anz].m23 = skeleton [x++];
-				matrix [anz].m30 = skeleton [x++];
-				matrix [anz].m31 = skeleton [x++];
-				matrix [anz].m32 = skeleton [x++];
-				matrix [anz].m33 = skeleton [x++];
-			}
-
-		
-        
+            int x = 0;
+            for (int anz = 0; anz < 21; anz++)
+            {
+                matrix[anz].m00 = skeleton[x++];
+                matrix[anz].m01 = skeleton[x++];
+                matrix[anz].m02 = skeleton[x++];
+                matrix[anz].m03 = skeleton[x++];
+                matrix[anz].m10 = skeleton[x++];
+                matrix[anz].m11 = skeleton[x++];
+                matrix[anz].m12 = skeleton[x++];
+                matrix[anz].m13 = skeleton[x++];
+                matrix[anz].m20 = skeleton[x++];
+                matrix[anz].m21 = skeleton[x++];
+                matrix[anz].m22 = skeleton[x++];
+                matrix[anz].m23 = skeleton[x++];
+                matrix[anz].m30 = skeleton[x++];
+                matrix[anz].m31 = skeleton[x++];
+                matrix[anz].m32 = skeleton[x++];
+                matrix[anz].m33 = skeleton[x++];
+            }
 
 
-		
-			for (int anz = 0; anz <21; anz++) {
-				//Rotation nicht für den Kopf
-				if (anz != 10)	
-					bones [anz].transform.localRotation = MoCapUtils.GetRotation (matrix [anz]);
-					sphere[anz].transform.localPosition = MoCapUtils.GetPosition (matrix [anz]);
 
-			}
 
-			
-            
+
+
+            for (int anz = 0; anz < 21; anz++)
+            {
+                //Rotation nicht für den Kopf
+                if (anz != 10)
+                    bones[anz].transform.localRotation = MoCapUtils.GetRotation(matrix[anz]);
+                sphere[anz].transform.localPosition = MoCapUtils.GetPosition(matrix[anz]);
+
+            }
+
+
+
 
             //Manual Controlling
             if (mocapcontrolling)
-            {                
+            {
                 if (Input.GetKey(KeyCode.C))
                 {
                     AvatarRoot.transform.Translate(new Vector3(Input.GetAxis("Vertical") * -0.03f, 0, Input.GetAxis("Horizontal") * 0.03f));
                 }
                 else
-                {   
+                {
                     AvatarRoot.transform.Translate(new Vector3(Input.GetAxis("Vertical") * -0.06f, 0, Input.GetAxis("Horizontal") * 0.06f));
                 }
 
@@ -328,17 +344,21 @@ public class MoCapAnsteuerung : MonoBehaviour
                 {
                     AvatarRoot.Rotate(new Vector3(0, 1, 0), 5f);
                 }
-                
+
                 #region LimittoPlayarea
                 float avatarx, avatarz;
                 if (AvatarRoot.position.z > 1.7f)
                 {
                     avatarz = 1.7f;
-                }else{    
+                }
+                else
+                {
                     if (AvatarRoot.position.z < -1.5f)
                     {
                         avatarz = -1.5f;
-                    }else{
+                    }
+                    else
+                    {
                         avatarz = AvatarRoot.position.z;
                     }
                 }
@@ -363,7 +383,7 @@ public class MoCapAnsteuerung : MonoBehaviour
             }
             else //controlling via MoCap, locking manual controlling
             {
-                AvatarRoot.transform.position = new Vector3(0,0,0);
+                AvatarRoot.transform.position = new Vector3(0, 0, 0);
 
 
                 if (initPosition == Vector3.zero) initPosition = sphere[1].transform.localPosition;
@@ -421,8 +441,9 @@ public class MoCapAnsteuerung : MonoBehaviour
         #endregion
     }
 
-	//Allowing to Save/Load Avatars Base Position from MoCap to OfflineVersion
-    public void saveSkeleton(string filename){
+    //Allowing to Save/Load Avatars Base Position from MoCap to OfflineVersion
+    public void saveSkeleton(string filename)
+    {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.dataPath + "/" + filename + ".dat");
 
@@ -440,15 +461,18 @@ public class MoCapAnsteuerung : MonoBehaviour
         print("File " + filename + " has been saved");
     }
 
-    public bool loadSkeleton(float[] skeletonarray, String filename) {
-        if (File.Exists(Application.dataPath + "/" + filename + ".dat")) {
+    public bool loadSkeleton(float[] skeletonarray, String filename)
+    {
+        if (File.Exists(Application.dataPath + "/" + filename + ".dat"))
+        {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.dataPath + "/" + filename + ".dat", FileMode.Open);
             AvatarData data = (AvatarData)bf.Deserialize(file);
             file.Close();
 
             int length = data.skeleton.Length;
-            for (int i = 0; i < length; i++) {
+            for (int i = 0; i < length; i++)
+            {
                 skeletonarray[i] = data.skeleton[i];
             }
 
@@ -461,6 +485,7 @@ public class MoCapAnsteuerung : MonoBehaviour
 //Allowing to Save/Load Avatars Base Position from MoCap to OfflineVersion
 
 [Serializable]
-class AvatarData { 
+class AvatarData
+{
     public float[] skeleton;
 }

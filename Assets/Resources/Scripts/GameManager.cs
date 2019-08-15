@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public Random rng;
     public int extralife;
     public int remaining_invulnarebility;
-    //public GameObject startbutton;
+    public GameObject backToMenu;
 
     public GameObject idleText, gameOverText;
 
@@ -34,14 +34,15 @@ public class GameManager : MonoBehaviour
         button2 = FindObjectOfType<StartButtonSurvivalMode>();
         headlineTxt = FindObjectOfType<headlineTxt>();
         // QualitySettings.vSyncCount = 1;
-        Application.targetFrameRate = 300;
+        // Sync framerate to monitors refresh rate
+        Application.targetFrameRate = 60;
 
     }
     // Use this for initialization
     void Start()
     {
 
-        // Sync framerate to monitors refresh rate
+
 
 
         if (!runningGame)
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour
 
     public void newGame()
     {
-        Debug.Log("New Game(Manager)");
+        Debug.Log("New Game(Time)");
         // start the counter
         FindObjectOfType<TimeManager>().startTimer();
         headlineTxt.changeState(false);
@@ -153,6 +154,7 @@ public class GameManager : MonoBehaviour
         //button1.transform.position = new Vector3(0.5f, 1.5f, -1.75f);
         gameOverText.SetActive(true);
         // add button to get back to the main menu
-        //SceneManager.LoadScene("Main Menu");
+        Vector3 pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1, gameObject.transform.position.z);
+        GameObject.Instantiate(backToMenu, pos, transform.rotation);
     }
 }

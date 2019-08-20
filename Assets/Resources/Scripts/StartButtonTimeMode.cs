@@ -1,21 +1,31 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
+public class StartButtonTimeMode : MonoBehaviour
+{
 
-public class StartButtonTimeMode : MonoBehaviour {
-
-    public Vector3 posAdd;
-
-	// Use this for initialization
+    // Use this for initialization
     GameManager manager;
-	void Start () {
+
+        AudioManager audioManager;
+    void Start()
+    {
         manager = FindObjectOfType<GameManager>();
-	}
+    }
 
     public void OnCollisionEnter(Collision collisionInfo)
     {
         if (collisionInfo.collider.tag == "Player")
         {
-            SceneManager.LoadScene("TimeLimitMode");
+            StartCoroutine(loadScene());
         }
+    }
+
+    IEnumerator loadScene()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+        audioManager.playStartSound();
+        yield return new WaitForSeconds(2.5f);
+        SceneManager.LoadScene("TimeLimitMode");
     }
 }

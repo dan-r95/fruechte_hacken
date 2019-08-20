@@ -8,6 +8,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip clip1;
     public AudioClip clip2;
 
+    public AudioClip gong;
+
     public AudioClip clip3;
 
     public AudioClip backgroundMusic;
@@ -59,5 +61,10 @@ public class AudioManager : MonoBehaviour
 
 
 
+    }
+
+    public void playStartSound(){
+         audiosources[1].clip = gong;
+                audiosources[1].Play(); 
     }
 }

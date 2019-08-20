@@ -53,20 +53,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\BackToMainMenu.cs" />
      <Compile Include="Assets\EffectExamples\Shared\Scripts\DecalDestroyer.cs" />
      <Compile Include="Assets\EffectExamples\Shared\Scripts\GunAim.cs" />
      <Compile Include="Assets\EffectExamples\Shared\Scripts\GunShoot.cs" />
      <Compile Include="Assets\EffectExamples\Shared\Scripts\ParticleExamples.cs" />
      <Compile Include="Assets\EffectExamples\Shared\Scripts\ParticleMenu.cs" />
-     <Compile Include="Assets\GrenadeExplode.cs" />
      <Compile Include="Assets\Resources\Scripts\AudioManager.cs" />
+     <Compile Include="Assets\Resources\Scripts\BackToMainMenu.cs" />
      <Compile Include="Assets\Resources\Scripts\Destruction.cs" />
      <Compile Include="Assets\Resources\Scripts\ExplodeFruitsScript.cs" />
      <Compile Include="Assets\Resources\Scripts\ExplodeItemScript.cs" />
      <Compile Include="Assets\Resources\Scripts\FruitSpawn.cs" />
      <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
      <Compile Include="Assets\Resources\Scripts\GameManagerSurvival.cs" />
+     <Compile Include="Assets\Resources\Scripts\GrenadeExplode.cs" />
      <Compile Include="Assets\Resources\Scripts\headlineTxt.cs" />
      <Compile Include="Assets\Resources\Scripts\MoCapAnsteuerung.cs" />
      <Compile Include="Assets\Resources\Scripts\MoCapUtils.cs" />

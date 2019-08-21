@@ -102,8 +102,9 @@ public class GameManagerSurvival : MonoBehaviour
         // dont display the header animation when game is started
         //idleText = GameObject.Find("IdleText");
         // idleText.gameObject.SetActive(false);
-        FindObjectOfType<FruitSpawn>().isSurvialMode = true;
-        FindObjectOfType<FruitSpawn>().newGame();
+        FruitSpawn fruitspawn = FindObjectOfType<FruitSpawn>();
+        fruitspawn.isSurvialMode = true;
+        fruitspawn.newGame();
 
         addScore(-score);
         turn = 0;

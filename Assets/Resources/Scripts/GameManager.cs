@@ -75,15 +75,14 @@ public class GameManager : MonoBehaviour
 
     public void newGame()
     {
-        Debug.Log("New Game(Time)");
-        // start the counter
-        FindObjectOfType<TimeManager>().startTimer();
+        Debug.Log("NEW  GAME(Time)");
         headlineTxt.changeState(false);
         // dont display the header animation when game is started
         idleText = GameObject.Find("IdleText");
         // idleText.gameObject.SetActive(false);
-         FindObjectOfType<FruitSpawn>().isSurvialMode = false;
-        FindObjectOfType<FruitSpawn>().newGame();
+          FruitSpawn fruitspawn = FindObjectOfType<FruitSpawn>();
+        fruitspawn.isSurvialMode = false;
+        fruitspawn.newGame();
         addScore(-score);
         turn = 0;
         extralife = 0;
@@ -91,7 +90,7 @@ public class GameManager : MonoBehaviour
         //button1.transform.position = new Vector3(0.5f, 1.5f, -5f);
         runningGame = true;
         Time.timeScale = 1;
-        splashgroup.hideAllSplashImage();
+        
     }
     public void addScore(int i)
     {

@@ -24,7 +24,6 @@ public class NameField : MonoBehaviour {
 	}
 
     public void OnSubmit() {
-        Debug.Log("Submit: "+inputField.text);
         goInputField.SetActive(false);
 
     }

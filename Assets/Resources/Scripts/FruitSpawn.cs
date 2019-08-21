@@ -27,6 +27,7 @@ public class FruitSpawn : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("start fruit spawn" + isSurvialMode);
         if (isSurvialMode)
         {
             managerSurvival = FindObjectOfType<GameManagerSurvival>();
@@ -80,7 +81,7 @@ public class FruitSpawn : MonoBehaviour
 
     public void newGame()
     {
-        Debug.Log("Fruit Spawn ");
+        Debug.Log("Fruit Spawn " + isSurvialMode);
         //FindObjectOfType<FruitSpawn>().startTime = Time.time; // equal to this.startTime = Time.time?
         this.startTime = Time.time;
         waveTime = startWaveTime;
@@ -111,6 +112,8 @@ public class FruitSpawn : MonoBehaviour
                 activeFruit = fruits[Random.Range(0, fruits.Count)];
                 Instantiate(activeFruit, spawnPoint[randindex].position, Quaternion.identity);
                 activeFruit.GetComponent<Sphare>().isSurivalMode = true;
+                // set to random to layer to minimize colliding chance
+                activeFruit.gameObject.layer = Random.Range(10,16);
                 spawnlimit++;
                 spawnslotused[randindex] = 1;
             }
@@ -125,6 +128,7 @@ public class FruitSpawn : MonoBehaviour
                 // use a different fruit each time
                 activeFruit = fruits[Random.Range(0, fruits.Count)];
                 Instantiate(activeFruit, spawnPoint[randindex].position, Quaternion.identity);
+                activeFruit.GetComponent<Sphare>().isSurivalMode = false;
                 spawnlimit++;
                 spawnslotused[randindex] = 1;
             }

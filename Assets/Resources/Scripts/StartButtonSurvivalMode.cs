@@ -27,7 +27,8 @@ public class StartButtonSurvivalMode : MonoBehaviour
     {
             audioManager = FindObjectOfType<AudioManager>();
             audioManager.playStartSound();
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(1.5f);
+            // darken the screen
             SceneManager.LoadScene("SurvivalMode");
     }
 }

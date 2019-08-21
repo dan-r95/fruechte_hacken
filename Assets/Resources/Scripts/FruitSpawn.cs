@@ -19,16 +19,27 @@ public class FruitSpawn : MonoBehaviour
     public float timeincrease = 0.04f;
     int randindex, randindex_old = 0, spawnlimit;
     GameManager manager;
+    GameManagerSurvival managerSurvival;
     bool[] spawnslotused;
     Vector3 spawnpos;
 
+    public bool isSurvialMode = false;
 
     void Start()
     {
-        manager = FindObjectOfType<GameManager>();
+        if (isSurvialMode)
+        {
+            managerSurvival = FindObjectOfType<GameManagerSurvival>();
+            managerSurvival.runningGame = false;
+        }
+        else
+        {
+            manager = FindObjectOfType<GameManager>();
+            manager.runningGame = false;
+        }
         waveTime = startWaveTime;
         startTime = Time.time;
-        manager.runningGame = false;
+
         fruits.Add(apple);
         fruits.Add(banana);
         fruits.Add(cherry);
@@ -40,21 +51,38 @@ public class FruitSpawn : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (manager.runningGame)
+        if (isSurvialMode)
         {
-            if ((Time.time - startTime) >= spawnTime)
+            if (managerSurvival.runningGame)
             {
-                SpawnColliders();
-                spawnTime += waveTime;
-                Time.timeScale += timeincrease;
+                if ((Time.time - startTime) >= spawnTime)
+                {
+                    SpawnColliders();
+                    spawnTime += waveTime;
+                    Time.timeScale += timeincrease;
+                }
             }
         }
+        else
+        {
+            if (manager.runningGame)
+            {
+                if ((Time.time - startTime) >= spawnTime)
+                {
+                    SpawnColliders();
+                    spawnTime += waveTime;
+                    Time.timeScale += timeincrease;
+                }
+            }
+        }
+
     }
 
     public void newGame()
     {
-        Debug.Log("Fruit Spawn New Game");
-        FindObjectOfType<FruitSpawn>().startTime = Time.time; // equal to this.startTime = Time.time?
+        Debug.Log("Fruit Spawn ");
+        //FindObjectOfType<FruitSpawn>().startTime = Time.time; // equal to this.startTime = Time.time?
+        this.startTime = Time.time;
         waveTime = startWaveTime;
         spawnTime = 0f;
         startTime = Time.time;
@@ -64,25 +92,45 @@ public class FruitSpawn : MonoBehaviour
 
     void SpawnColliders()
     {
-        int[] spawnslotused = new int[4];
+        int[] spawnslotused = new int[5];
         spawnslotused[0] = 0;
         spawnslotused[1] = 0;
         spawnslotused[2] = 0;
         spawnslotused[3] = 0;
-        //spawnslotused[4] = 0;
+        spawnslotused[4] = 0;
 
         GameObject activeFruit;
 
         spawnlimit = 2;
-        for (int i = 0; i <= manager.turn / 10 && i < spawnlimit; i++) //i represents the number of obstacles or items to spawn in a single wave
+        if (isSurvialMode)
         {
-            randindex = Random.Range(0, spawnslotused.Length);
+            for (int i = 0; i <= managerSurvival.turn / 10 && i < spawnlimit; i++) //i represents the number of obstacles or items to spawn in a single wave
+            {
+                randindex = Random.Range(0, spawnslotused.Length);
+                // use a different fruit each time
+                activeFruit = fruits[Random.Range(0, fruits.Count)];
+                Instantiate(activeFruit, spawnPoint[randindex].position, Quaternion.identity);
+                activeFruit.GetComponent<Sphare>().isSurivalMode = true;
+                spawnlimit++;
+                spawnslotused[randindex] = 1;
+            }
 
-            activeFruit = fruits[Random.Range(0, fruits.Count)];
-            Instantiate(activeFruit, spawnPoint[randindex].position, Quaternion.identity);
-            spawnlimit++;
-            spawnslotused[randindex] = 1;
+            managerSurvival.turn++;
         }
-        manager.turn++;
+        else
+        {
+            for (int i = 0; i <= manager.turn / 10 && i < spawnlimit; i++) //i represents the number of obstacles or items to spawn in a single wave
+            {
+                randindex = Random.Range(0, spawnslotused.Length);
+                // use a different fruit each time
+                activeFruit = fruits[Random.Range(0, fruits.Count)];
+                Instantiate(activeFruit, spawnPoint[randindex].position, Quaternion.identity);
+                spawnlimit++;
+                spawnslotused[randindex] = 1;
+            }
+
+            manager.turn++;
+        }
+
     }
 }

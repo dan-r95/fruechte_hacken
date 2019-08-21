@@ -91,7 +91,7 @@ public class MoCapAnsteuerung : MonoBehaviour
             sphere[i].transform.parent = AvatarRoot;
             if (i == 10)
             {
-                hat = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/hat Variant"), sphere[10].transform.localPosition, Quaternion.identity); //Sphären Instanzieren und Erstellen
+                hat = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/hat Variant"), sphere[10].transform.localPosition, Quaternion.identity); // spawn hat
             }
             Debug.Log(skeleton[10]);
         }

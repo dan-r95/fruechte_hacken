@@ -6,7 +6,9 @@ public class GrenadeExplode : MonoBehaviour
 {
 
     public GameObject explosionEffect;
+    AudioManager audioManager;
 
+    GameManagerSurvival managerSurvival;
     bool hasExploded = false;
     // Start is called before the first frame update
     void Start()
@@ -22,16 +24,26 @@ public class GrenadeExplode : MonoBehaviour
 
     void OnCollisionEnter(Collision collisionInfo)
     {
-        if (!hasExploded)
+        Debug.Log(hasExploded);
+        if (!hasExploded && collisionInfo.collider.tag == "Player")
         {
+            hasExploded = true;
             Debug.Log("Boom");
+            // deduct 3 lives when bomb hits
+            managerSurvival = FindObjectOfType<GameManagerSurvival>();
+            managerSurvival.addExtralife(-3);
             Explode();
+
+
         }
     }
     void Explode()
     {
+      
         Instantiate(explosionEffect, transform.position, transform.rotation);
+        audioManager = FindObjectOfType<AudioManager>();
+        audioManager.playExplosion();
         Destroy(gameObject);  // grenade itself
-        hasExploded = true;
+
     }
 }

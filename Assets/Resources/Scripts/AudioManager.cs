@@ -10,6 +10,8 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip gong;
 
+    public AudioClip explosion;
+
     public AudioClip clip3;
 
     public AudioClip backgroundMusic;
@@ -58,13 +60,17 @@ public class AudioManager : MonoBehaviour
                 audiosources[1].clip = clip3;
                 audiosources[1].Play(); break;
         }
-
-
-
     }
 
-    public void playStartSound(){
-         audiosources[1].clip = gong;
-                audiosources[1].Play(); 
+    public void playStartSound()
+    {
+        audiosources[1].clip = gong;
+        audiosources[1].Play();
+    }
+
+    public void playExplosion()
+    {
+        audiosources[1].clip = explosion;
+        audiosources[1].Play();
     }
 }

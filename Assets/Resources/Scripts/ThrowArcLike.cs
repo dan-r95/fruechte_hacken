@@ -10,6 +10,8 @@ public class ThrowArcLike : MonoBehaviour
     public Transform Projectile;
     private Transform myTransform;
 
+    public bool shouldRotate = false;
+
     void Awake()
     {
         myTransform = transform;
@@ -24,14 +26,20 @@ public class ThrowArcLike : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.X))
             StartCoroutine(SimulateProjectile());
+        if (shouldRotate)
+        {
+            Projectile.Rotate(new Vector3(0, 0, 0.8f));
+        }
     }
 
 
 
-    IEnumerator SimulateProjectile()
+    public IEnumerator SimulateProjectile()
     {
+        // while (Projectile != null && Projectile.gameObject.activeInHierarchy)
+        // {
         // Short delay added before Projectile is thrown
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
 
         // Move projectile to the position of throwing object + add some offset if needed.
         Projectile.position = myTransform.position + new Vector3(0, 0.0f, 0);
@@ -66,5 +74,19 @@ public class ThrowArcLike : MonoBehaviour
         // return to initital position
         Projectile.position = myTransform.position + new Vector3(0, 0.0f, 0);
 
+        //}
+        if (gameObject == null && !gameObject.activeInHierarchy)
+        {
+            StopAllCoroutines();
+        }
+        if (Projectile.gameObject == null && !Projectile.gameObject.activeInHierarchy)
+        {
+            StopAllCoroutines();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        StopCoroutine(SimulateProjectile());
     }
 }

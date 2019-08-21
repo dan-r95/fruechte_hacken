@@ -29,6 +29,8 @@ public class GameManagerSurvival : MonoBehaviour
 
     public GameObject backToMenu;
 
+    public GameObject startPos;
+
     void Awake()
     {
         scoreTxt = FindObjectOfType<ScoreScript>();
@@ -43,16 +45,11 @@ public class GameManagerSurvival : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
-
-
-
         if (!runningGame)
         {
             //extralives.text="";
             //headlineTxt.changeState(false);
-            idleText = GameObject.Find("IdleText");
-            idleText.gameObject.SetActive(true);
+
             //gameOverText = GameObject.Find("gameOverText");
             //gameOverText.gameObject.SetActive(false);
         }
@@ -66,12 +63,35 @@ public class GameManagerSurvival : MonoBehaviour
             noclip = !noclip;
         }
         if (Input.GetKey(KeyCode.N) && !runningGame)
+        {
             newGame();
-
+        }
         if (remaining_invulnarebility > 0)
             remaining_invulnarebility--;
         if (runningGame)
             Time.timeScale += 0.00001f; //speeding up the game
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            float speed = 4;
+            GameObject target = GameObject.Find("end");
+            Vector3 pos = new Vector3(startPos.transform.position.x, startPos.transform.position.y, startPos.transform.position.z);
+            GameObject bomb = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/bomb_ST6TPHC Variant"), pos, transform.rotation);
+
+            ThrowArcLike script = (ThrowArcLike)bomb.GetComponent<ThrowArcLike>();
+            script.firingAngle = 10f;
+            script.Target = target.transform;
+            script.gravity = 3.1f;
+            // script.shouldRotate = true;
+            StartCoroutine(script.SimulateProjectile());
+
+        }
+    }
+
+    public IEnumerator spawnBombs()
+    {
+
+
+        yield return new WaitForSeconds(10f);
     }
 
     public void newGame()
@@ -80,9 +100,11 @@ public class GameManagerSurvival : MonoBehaviour
         // start the counter
         headlineTxt.changeState(false);
         // dont display the header animation when game is started
-        idleText = GameObject.Find("IdleText");
+        //idleText = GameObject.Find("IdleText");
         // idleText.gameObject.SetActive(false);
+        FindObjectOfType<FruitSpawn>().isSurvialMode = true;
         FindObjectOfType<FruitSpawn>().newGame();
+
         addScore(-score);
         turn = 0;
         extralife = 0;
@@ -155,6 +177,8 @@ public class GameManagerSurvival : MonoBehaviour
         //button1.transform.position = new Vector3(0.5f, 1.5f, -1.75f);
         gameOverText.SetActive(true);
         // add button to get back to the main menu
-        GameObject.Instantiate(backToMenu, gameObject.transform.position, transform.rotation);
+        Vector3 pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1, gameObject.transform.position.z);
+        GameObject.Instantiate(Resources.Load("Prefabs/gong backToMain Variant"), pos, Quaternion.identity); //Sphären Instanzieren und Erstellen
+
     }
 }

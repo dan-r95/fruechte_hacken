@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
 
     public ShowSplashImageCanvas splashgroup;
 
+
+
     void Awake()
     {
         scoreTxt = FindObjectOfType<ScoreScript>();
@@ -41,16 +43,12 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
-
-
-
         if (!runningGame)
         {
             //extralives.text="";
             //headlineTxt.changeState(false);
-            idleText = GameObject.Find("IdleText");
-            idleText.gameObject.SetActive(true);
+            // idleText = GameObject.Find("IdleText");
+            // idleText.gameObject.SetActive(true);
             //gameOverText = GameObject.Find("gameOverText");
             //gameOverText.gameObject.SetActive(false);
         }
@@ -70,6 +68,9 @@ public class GameManager : MonoBehaviour
             remaining_invulnarebility--;
         if (runningGame)
             Time.timeScale += 0.00001f; //speeding up the game
+
+
+
     }
 
     public void newGame()
@@ -81,6 +82,7 @@ public class GameManager : MonoBehaviour
         // dont display the header animation when game is started
         idleText = GameObject.Find("IdleText");
         // idleText.gameObject.SetActive(false);
+         FindObjectOfType<FruitSpawn>().isSurvialMode = false;
         FindObjectOfType<FruitSpawn>().newGame();
         addScore(-score);
         turn = 0;
@@ -147,6 +149,8 @@ public class GameManager : MonoBehaviour
         remaining_invulnarebility = i;
     }
 
+
+
     public void EndGame()
     {
         runningGame = false;
@@ -155,6 +159,6 @@ public class GameManager : MonoBehaviour
         gameOverText.SetActive(true);
         // add button to get back to the main menu
         Vector3 pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1, gameObject.transform.position.z);
-        GameObject.Instantiate(backToMenu, pos, transform.rotation);
+        GameObject.Instantiate(Resources.Load("Prefabs/gong backToMain Variant"), pos, transform.rotation); //Sphären Instanzieren und Erstellen
     }
 }

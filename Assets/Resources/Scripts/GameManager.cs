@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
         // dont display the header animation when game is started
         idleText = GameObject.Find("IdleText");
         // idleText.gameObject.SetActive(false);
-          FruitSpawn fruitspawn = FindObjectOfType<FruitSpawn>();
+        FruitSpawn fruitspawn = FindObjectOfType<FruitSpawn>();
         fruitspawn.isSurvialMode = false;
         fruitspawn.newGame();
         addScore(-score);
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
         //button1.transform.position = new Vector3(0.5f, 1.5f, -5f);
         runningGame = true;
         Time.timeScale = 1;
-        
+
     }
     public void addScore(int i)
     {
@@ -108,14 +108,14 @@ public class GameManager : MonoBehaviour
     {
         extralife = l;
         // TODO delte
-        extralives.text = "Leben: " + extralife;
+        extralives.text = extralife.ToString();
     }
 
     public void addExtralife(int l)
     {
         extralife += l;
         // TODO delete
-        extralives.text = "Leben: " + extralife;
+        extralives.text = extralife.ToString();
     }
 
 
@@ -157,7 +157,10 @@ public class GameManager : MonoBehaviour
         //button1.transform.position = new Vector3(0.5f, 1.5f, -1.75f);
         gameOverText.SetActive(true);
         // add button to get back to the main menu
-        Vector3 pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1, gameObject.transform.position.z);
-        GameObject.Instantiate(Resources.Load("Prefabs/gong backToMain Variant"), pos, transform.rotation); //Sphären Instanzieren und Erstellen
+
+        Vector3 pos = new Vector3(-1.2f, 1f, 0f);
+        GameObject gong = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/gong backToMain Variant"), pos, Quaternion.Euler(0, 90, 0));
+        gong.transform.localScale = new Vector3(0.07f, 0.07f, 0.07f);
     }
+
 }

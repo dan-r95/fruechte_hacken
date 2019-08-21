@@ -25,7 +25,6 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         audiosources = GetComponents<AudioSource>();
-        Debug.Log(audiosources);
         audiosources[0].clip = backgroundMusic;
         audiosources[0].Play();
 

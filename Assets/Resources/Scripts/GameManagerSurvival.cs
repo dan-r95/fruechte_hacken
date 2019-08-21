@@ -131,14 +131,14 @@ public class GameManagerSurvival : MonoBehaviour
     {
         extralife = l;
         // TODO delte
-        extralives.text = "Leben: " + extralife;
+        extralives.text = extralife.ToString(); ;
     }
 
     public void addExtralife(int l)
     {
         extralife += l;
         // TODO delete
-        extralives.text = "Leben: " + extralife;
+        extralives.text = extralife.ToString();
     }
 
 
@@ -178,8 +178,9 @@ public class GameManagerSurvival : MonoBehaviour
         //button1.transform.position = new Vector3(0.5f, 1.5f, -1.75f);
         gameOverText.SetActive(true);
         // add button to get back to the main menu
-        Vector3 pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1, gameObject.transform.position.z);
-        GameObject.Instantiate(Resources.Load("Prefabs/gong backToMain Variant"), pos, Quaternion.identity); //Sphären Instanzieren und Erstellen
+        Vector3 pos = new Vector3(-1.2f, 1f, 0f);
+        GameObject gong = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/gong backToMain Variant"), pos, Quaternion.Euler(0, 90, 0));
+        gong.transform.localScale = new Vector3(0.07f, 0.07f, 0.07f);
 
     }
 }

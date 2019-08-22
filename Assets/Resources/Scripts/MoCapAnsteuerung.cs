@@ -93,7 +93,7 @@ public class MoCapAnsteuerung : MonoBehaviour
             {
                 hat = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/hat Variant"), sphere[10].transform.localPosition, Quaternion.identity); // spawn hat
             }
-            Debug.Log(skeleton[10]);
+            //Debug.Log(skeleton[10]);
         }
     }
 
@@ -345,32 +345,41 @@ public class MoCapAnsteuerung : MonoBehaviour
                     AvatarRoot.Rotate(new Vector3(0, 1, 0), 5f);
                 }
 
+                //Jump on space
+                 if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    Vector3 pos = new Vector3(AvatarRoot.transform.position.x, AvatarRoot.transform.position.y +1, AvatarRoot.transform.position.z);
+                    
+                   AvatarRoot.transform.Translate(new Vector3(Input.GetAxis("Vertical") * 0.06f, 0, Input.GetAxis("Horizontal") * 0.03f));
+                }
+
+
                 #region LimittoPlayarea
                 float avatarx, avatarz;
-                if (AvatarRoot.position.z > 1.7f)
+                if (AvatarRoot.position.z > 2.5f)
                 {
-                    avatarz = 1.7f;
+                    avatarz = 2.5f;
                 }
                 else
                 {
-                    if (AvatarRoot.position.z < -1.5f)
+                    if (AvatarRoot.position.z < -2f)
                     {
-                        avatarz = -1.5f;
+                        avatarz = -2f;
                     }
                     else
                     {
                         avatarz = AvatarRoot.position.z;
                     }
                 }
-                if (AvatarRoot.position.x > 1.3f)
+                if (AvatarRoot.position.x > 1.4f)
                 {
-                    avatarx = 1.3f;
+                    avatarx = 1.4f;
                 }
                 else
                 {
-                    if (AvatarRoot.position.x < -1.3f)
+                    if (AvatarRoot.position.x < -1.8f)
                     {
-                        avatarx = -1.3f;
+                        avatarx = -1.8f;
                     }
                     else
                     {

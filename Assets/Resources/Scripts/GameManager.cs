@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 
-    public float speed = 1f;
+    public float speed = 0.8f;
     private float startTime, journeyLength;
     public bool runningGame = false;
     public bool noclip = false;
@@ -61,13 +61,13 @@ public class GameManager : MonoBehaviour
         {
             noclip = !noclip;
         }
-        if (Input.GetKey(KeyCode.N) && !runningGame)
+        if (Input.GetKeyDown(KeyCode.N) && !runningGame)
             newGame();
 
         if (remaining_invulnarebility > 0)
             remaining_invulnarebility--;
         if (runningGame)
-            Time.timeScale += 0.00001f; //speeding up the game
+            Time.timeScale += 0.000001f; //speeding up the game
 
 
 
@@ -87,7 +87,8 @@ public class GameManager : MonoBehaviour
         turn = 0;
         extralife = 0;
         setExtralife(10);
-        //button1.transform.position = new Vector3(0.5f, 1.5f, -5f);
+        TimeManager timeManager = FindObjectOfType<TimeManager>();
+        timeManager.startTimer();
         runningGame = true;
         Time.timeScale = 1;
 

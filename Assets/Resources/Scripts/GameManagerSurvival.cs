@@ -62,7 +62,7 @@ public class GameManagerSurvival : MonoBehaviour
         {
             noclip = !noclip;
         }
-        if (Input.GetKey(KeyCode.N) && !runningGame)
+        if (Input.GetKeyDown(KeyCode.N) && !runningGame)
         {
             newGame();
         }
@@ -70,21 +70,6 @@ public class GameManagerSurvival : MonoBehaviour
             remaining_invulnarebility--;
         if (runningGame)
             Time.timeScale += 0.00001f; //speeding up the game
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            float speed = 4;
-            GameObject target = GameObject.Find("end");
-            Vector3 pos = new Vector3(startPos.transform.position.x, startPos.transform.position.y, startPos.transform.position.z);
-            GameObject bomb = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/bomb_ST6TPHC Variant"), pos, transform.rotation);
-
-            ThrowArcLike script = (ThrowArcLike)bomb.GetComponent<ThrowArcLike>();
-            script.firingAngle = 10f;
-            script.Target = target.transform;
-            script.gravity = 3.1f;
-            // script.shouldRotate = true;
-            StartCoroutine(script.SimulateProjectile());
-
-        }
     }
 
     public IEnumerator spawnBombs()
@@ -92,13 +77,33 @@ public class GameManagerSurvival : MonoBehaviour
 
 
         yield return new WaitForSeconds(10f);
+
+        GameObject target0 = GameObject.Find("end");
+        GameObject target1 = GameObject.Find("end (1)");
+        GameObject target2 = GameObject.Find("end (2)");
+        Vector3 pos = new Vector3(startPos.transform.position.x, startPos.transform.position.y, startPos.transform.position.z);
+        GameObject bomb = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/bomb_ST6TPHC Variant"), pos, transform.rotation);
+
+        ThrowArcLike script = (ThrowArcLike)bomb.GetComponent<ThrowArcLike>();
+        script.firingAngle = 10f;
+
+        script.gravity = 3.1f;
+        int nextPlacement = Random.Range(0, 2);
+        switch (nextPlacement)
+        {
+            case 0: script.Target = target0.transform; break;
+            case 1: script.Target = target1.transform; break;
+            case 2: script.Target = target2.transform; break;
+        }
+        // script.shouldRotate = true;
+        StartCoroutine(script.SimulateProjectile());
     }
 
     public void newGame()
     {
         Debug.Log("New Game(Survival)");
         // start the counter
-        headlineTxt.changeState(false);
+        //headlineTxt.changeState(false);
         // dont display the header animation when game is started
         //idleText = GameObject.Find("IdleText");
         // idleText.gameObject.SetActive(false);
@@ -109,11 +114,11 @@ public class GameManagerSurvival : MonoBehaviour
         addScore(-score);
         turn = 0;
         extralife = 0;
-        // setExtralife(10);
-        //button1.transform.position = new Vector3(0.5f, 1.5f, -5f);
+        setExtralife(10);
         runningGame = true;
         Time.timeScale = 1;
-        splashgroup.hideAllSplashImage();
+        //splashgroup.hideAllSplashImage();
+        StartCoroutine(spawnBombs());
     }
     public void addScore(int i)
     {

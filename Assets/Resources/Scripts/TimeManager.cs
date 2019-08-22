@@ -23,7 +23,7 @@ public class TimeManager : MonoBehaviour
         //Initialize timer with 1 second intervals
         Time.timeScale = 1; //Just making sure that the timeScale is right
         StartCoroutine(CountDownToZero());
-        
+
 
     }
 
@@ -38,6 +38,7 @@ public class TimeManager : MonoBehaviour
             timeLeft--;
             if (timeLeft == 0)
             {
+                timeLeftText.SetActive(false);
                 FindObjectOfType<GameManager>().EndGame();
                 yield break;
             }

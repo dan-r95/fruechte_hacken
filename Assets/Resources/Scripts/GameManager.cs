@@ -15,13 +15,12 @@ public class GameManager : MonoBehaviour
     ScoreScript scoreTxt;
     headlineTxt headlineTxt;
     public Text extralives;
-    public Text textinvulnarebility;
     StartButtonTimeMode button1;
     StartButtonSurvivalMode button2;
-    public Random rng;
+
     public int extralife;
     public int remaining_invulnarebility;
-    public GameObject backToMenu;
+
 
     public GameObject idleText, gameOverText;
 

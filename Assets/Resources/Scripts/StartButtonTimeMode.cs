@@ -7,7 +7,7 @@ public class StartButtonTimeMode : MonoBehaviour
     // Use this for initialization
     GameManager manager;
 
-        AudioManager audioManager;
+    AudioManager audioManager;
     void Start()
     {
         manager = FindObjectOfType<GameManager>();
@@ -26,7 +26,7 @@ public class StartButtonTimeMode : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         audioManager.playStartSound();
         yield return new WaitForSeconds(1.5f);
-            // darken the screen
+        // darken the screen
         SceneManager.LoadScene("TimeLimitMode");
     }
 }

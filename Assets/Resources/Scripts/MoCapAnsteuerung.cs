@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using Ventuz.OSC;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -83,9 +82,11 @@ public class MoCapAnsteuerung : MonoBehaviour
         skeleton = new float[336];
         AvatarRoot = GameObject.FindGameObjectWithTag("AvatarRoot").transform;
         for (int i = 0; i < 21; i++)
-        {
+        {   //hands and feet and head
             if (i == 5 || i == 8 || i == 10 || i == 15 || i == 20)
+            {
                 sphere[i] = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/SphereCollider"), new Vector3(0f, 0f, 0f), Quaternion.identity); //Sphären Instanzieren und Erstellen
+            }
             else
                 sphere[i] = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Sphere"), new Vector3(0f, 0f, 0f), Quaternion.identity); //Sphären Instanzieren und Erstellen
             sphere[i].transform.parent = AvatarRoot;
@@ -93,6 +94,7 @@ public class MoCapAnsteuerung : MonoBehaviour
             {
                 hat = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/hat Variant"), sphere[10].transform.localPosition, Quaternion.identity); // spawn hat
             }
+
             //Debug.Log(skeleton[10]);
         }
     }
@@ -276,7 +278,7 @@ public class MoCapAnsteuerung : MonoBehaviour
             }
 
             // set hat to specific position and rotation
-            Vector3 pos = new Vector3( sphere[10].transform.position.x,  sphere[10].transform.position.y - 0.18f,  sphere[10].transform.position.z);
+            Vector3 pos = new Vector3(sphere[10].transform.position.x, sphere[10].transform.position.y - 0.18f, sphere[10].transform.position.z);
             hat.transform.position = pos;
             hat.transform.rotation = sphere[9].transform.localRotation;
         }
@@ -346,16 +348,31 @@ public class MoCapAnsteuerung : MonoBehaviour
                 }
 
                 //Jump on space
-                 if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    Vector3 pos = new Vector3(AvatarRoot.transform.position.x, AvatarRoot.transform.position.y +1, AvatarRoot.transform.position.z);
+                    // Vector3 pos = new Vector3(AvatarRoot.transform.position.x, AvatarRoot.transform.position.y + 1, AvatarRoot.transform.position.z);
+
+                    //AvatarRoot.transform.Translate(new Vector3(Input.GetAxis("Vertical") * 0.06f, 0, Input.GetAxis("Horizontal") * 0.03f));
+                    float moveHorizontal = Input.GetAxis("Horizontal");
+                    float moveVertical = Input.GetAxis("Vertical");
+                  //  float moveForward = Input.GetAxis("Forward");
+
+                    Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+
+                
+                    float JumpSpeed = 5.0f;
+                  //  Vector3 jump = new Vector3(0.0f, moveForward, 0.0f);
                     
-                   AvatarRoot.transform.Translate(new Vector3(Input.GetAxis("Vertical") * 0.06f, 0, Input.GetAxis("Horizontal") * 0.03f));
+                    Rigidbody rb = (Rigidbody) AvatarRoot.GetComponent<Rigidbody>();
+                    //rb.AddForce(movement * jump);
+
+                     rb.velocity = new Vector3(0,0.5f,0);
                 }
 
 
                 #region LimittoPlayarea
-                float avatarx, avatarz;
+                float avatarx, avatarz, avatary;
+                avatary = AvatarRoot.position.y;
                 if (AvatarRoot.position.z > 2.5f)
                 {
                     avatarz = 2.5f;
@@ -387,7 +404,9 @@ public class MoCapAnsteuerung : MonoBehaviour
                     }
                 }
 
-                AvatarRoot.transform.position = new Vector3(avatarx, 0, avatarz);
+
+                //AvatarRoot.transform.position = new Vector3(avatarx, 0, avatarz);
+                AvatarRoot.transform.position = new Vector3(avatarx, avatary, avatarz);
                 #endregion 
             }
             else //controlling via MoCap, locking manual controlling

@@ -5,8 +5,6 @@ using System.Collections;
 public class StartButtonSurvivalMode : MonoBehaviour
 {
 
-    public Vector3 posAdd;
-
     // Use this for initialization
     GameManagerSurvival manager;
     AudioManager audioManager;

@@ -355,18 +355,18 @@ public class MoCapAnsteuerung : MonoBehaviour
                     //AvatarRoot.transform.Translate(new Vector3(Input.GetAxis("Vertical") * 0.06f, 0, Input.GetAxis("Horizontal") * 0.03f));
                     float moveHorizontal = Input.GetAxis("Horizontal");
                     float moveVertical = Input.GetAxis("Vertical");
-                  //  float moveForward = Input.GetAxis("Forward");
+                    //  float moveForward = Input.GetAxis("Forward");
 
                     Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
 
-                
+
                     float JumpSpeed = 5.0f;
-                  //  Vector3 jump = new Vector3(0.0f, moveForward, 0.0f);
-                    
-                    Rigidbody rb = (Rigidbody) AvatarRoot.GetComponent<Rigidbody>();
+                    //  Vector3 jump = new Vector3(0.0f, moveForward, 0.0f);
+
+                    Rigidbody rb = (Rigidbody)AvatarRoot.GetComponent<Rigidbody>();
                     //rb.AddForce(movement * jump);
 
-                     rb.velocity = new Vector3(0,0.5f,0);
+                    rb.velocity = new Vector3(0, 4f, 0);
                 }
 
 

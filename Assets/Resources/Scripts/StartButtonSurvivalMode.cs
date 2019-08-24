@@ -27,6 +27,6 @@ public class StartButtonSurvivalMode : MonoBehaviour
             audioManager.playStartSound();
             yield return new WaitForSeconds(1.5f);
             // darken the screen
-            SceneManager.LoadScene("SurvivalMode");
+            SceneManager.LoadSceneAsync("SurvivalMode");
     }
 }

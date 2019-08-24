@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
@@ -26,7 +26,9 @@ public class GameManager : MonoBehaviour
 
     public ShowSplashImageCanvas splashgroup;
 
+    public Scene current;
 
+    public GameObject avatar;
 
     void Awake()
     {
@@ -37,20 +39,21 @@ public class GameManager : MonoBehaviour
         // QualitySettings.vSyncCount = 1;
         // Sync framerate to monitors refresh rate
         Application.targetFrameRate = 60;
-
+        current = SceneManager.GetActiveScene();
     }
     // Use this for initialization
     void Start()
     {
-        if (!runningGame)
-        {
-            //extralives.text="";
-            //headlineTxt.changeState(false);
-            // idleText = GameObject.Find("IdleText");
-            // idleText.gameObject.SetActive(true);
-            //gameOverText = GameObject.Find("gameOverText");
-            //gameOverText.gameObject.SetActive(false);
-        }
+        StartCoroutine(StartGameAfterLoading());
+        // if (!runningGame)
+        //{
+        //extralives.text="";
+        //headlineTxt.changeState(false);
+        // idleText = GameObject.Find("IdleText");
+        // idleText.gameObject.SetActive(true);
+        //gameOverText = GameObject.Find("gameOverText");
+        //gameOverText.gameObject.SetActive(false);
+        //}
     }
 
     // Update is called once per frame
@@ -60,36 +63,48 @@ public class GameManager : MonoBehaviour
         {
             noclip = !noclip;
         }
-        if (Input.GetKeyDown(KeyCode.N) && !runningGame)
-            newGame();
-
+        /*  if (Input.GetKeyDown(KeyCode.N) && !runningGame)
+             newGame();
+  */
         if (remaining_invulnarebility > 0)
             remaining_invulnarebility--;
         if (runningGame)
             Time.timeScale += 0.000001f; //speeding up the game
+    }
 
-
-
+    private IEnumerator StartGameAfterLoading()
+    {
+        yield return new WaitForSeconds(2f);
+        avatar.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        newGame();
     }
 
     public void newGame()
     {
-        Debug.Log("NEW  GAME(Time)");
-        headlineTxt.changeState(false);
-        // dont display the header animation when game is started
-        idleText = GameObject.Find("IdleText");
-        // idleText.gameObject.SetActive(false);
-        FruitSpawn fruitspawn = FindObjectOfType<FruitSpawn>();
-        fruitspawn.isSurvialMode = false;
-        fruitspawn.newGame();
-        addScore(-score);
-        turn = 0;
-        extralife = 0;
-        setExtralife(10);
-        TimeManager timeManager = FindObjectOfType<TimeManager>();
-        timeManager.startTimer();
-        runningGame = true;
-        Time.timeScale = 1;
+
+        if (current.name != "Time Mode" && current.name != "Main Menu")
+        {
+            Debug.Log("NEW  GAME(Time)");
+            if (headlineTxt != null)
+            {
+                headlineTxt.changeState(false);
+            }
+            // dont display the header animation when game is started
+            idleText = GameObject.Find("IdleText");
+            // idleText.gameObject.SetActive(false);
+            FruitSpawn fruitspawn = FindObjectOfType<FruitSpawn>();
+            fruitspawn.isSurvialMode = false;
+            fruitspawn.newGame();
+            addScore(-score);
+            turn = 0;
+            extralife = 0;
+            setExtralife(10);
+            TimeManager timeManager = FindObjectOfType<TimeManager>();
+            timeManager.startTimer();
+            runningGame = true;
+            Time.timeScale = 1;
+        }
 
     }
     public void addScore(int i)

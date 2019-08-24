@@ -28,89 +28,93 @@ public class Sphare : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         if (isSurivalMode)
         {
             if (managerSurvival == null)
                 managerSurvival = FindObjectOfType<GameManagerSurvival>();
 
-            if (splashimage == null)
-                splashimage = FindObjectOfType<ShowSplashImageCanvas>();
-
-            if ((transform.position.x > 5) || (!managerSurvival.runningGame && transform.position.x < 0))
+            if (managerSurvival != null)
             {
-                Destroy(gameObject);
-                if (managerSurvival.extralife > 0)
+                if (splashimage == null)
+                    splashimage = FindObjectOfType<ShowSplashImageCanvas>();
+
+                if ((transform.position.x > 5) || (!managerSurvival.runningGame && transform.position.x < 0))
                 {
-                    managerSurvival.addExtralife(-1);
-                }
-                /* 
-                                switch (managerSurvival.extralife)
-                                {
-                                    case 0:
-                                        splashimage.image10.enabled = true;
-                                        break;
-                                    case 1:
-                                        splashimage.image9.enabled = true;
-                                        break;
-                                    case 2:
-                                        splashimage.image8.enabled = true;
-                                        break;
-                                    case 3:
-                                        splashimage.image7.enabled = true;
-                                        break;
-                                    case 4:
-                                        splashimage.image6.enabled = true;
-                                        break;
-                                    case 5:
-                                        splashimage.image5.enabled = true;
-                                        break;
-                                    case 6:
-                                        splashimage.image4.enabled = true;
-                                        break;
-                                    case 7:
-                                        splashimage.image3.enabled = true;
-                                        break;
-                                    case 8:
-                                        splashimage.image2.enabled = true;
-                                        break;
-                                    case 9:
-                                        splashimage.image1.enabled = true;
-                                        break;
-                                    default:
-                                        break;
-                                }
-                                */
-            }
+                    Destroy(gameObject);
+                    if (managerSurvival.extralife > 0)
+                    {
+                        managerSurvival.addExtralife(-1);
+                    }
 
-            if (managerSurvival.extralife <= 0)
-            {
-                Debug.Log("oh not, not lives left :/ Game over");
-                managerSurvival.extralife = 0; // be sure we dont get a negative one
-                managerSurvival.EndGame();
-                return;
+                    switch (managerSurvival.extralife)
+                    {
+                        case 0:
+                            splashimage.image10.enabled = true;
+                            break;
+                        case 1:
+                            splashimage.image9.enabled = true;
+                            break;
+                        case 2:
+                            splashimage.image8.enabled = true;
+                            break;
+                        case 3:
+                            splashimage.image7.enabled = true;
+                            break;
+                        case 4:
+                            splashimage.image6.enabled = true;
+                            break;
+                        case 5:
+                            splashimage.image5.enabled = true;
+                            break;
+                        case 6:
+                            splashimage.image4.enabled = true;
+                            break;
+                        case 7:
+                            splashimage.image3.enabled = true;
+                            break;
+                        case 8:
+                            splashimage.image2.enabled = true;
+                            break;
+                        case 9:
+                            splashimage.image1.enabled = true;
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
+
+                if (managerSurvival.extralife <= 0)
+                {
+                    Debug.Log("oh not, not lives left :/ Game over");
+                    managerSurvival.extralife = 0; // be sure we dont get a negative one
+                    managerSurvival.EndGame();
+                    return;
+                }
             }
         }
         else
         {
             if (manager == null)
                 manager = FindObjectOfType<GameManager>();
-
-            if (splashimage == null)
-                splashimage = FindObjectOfType<ShowSplashImageCanvas>();
-
-            if ((transform.position.x > 5) || (!manager.runningGame && transform.position.x < 0))
+            if (manager != null)
             {
-                Destroy(gameObject);
-                if (manager.extralife > 0)
+                if (splashimage == null)
+                    splashimage = FindObjectOfType<ShowSplashImageCanvas>();
+
+                if ((transform.position.x > 5) || (!manager.runningGame && transform.position.x < 0))
                 {
-                    manager.addExtralife(-1);
+                    Destroy(gameObject);
+                    if (manager.extralife > 0)
+                    {
+                        manager.addExtralife(-1);
+                    }
+
+
                 }
 
-
             }
-
-            
         }
 
     }
@@ -122,13 +126,14 @@ public class Sphare : MonoBehaviour
             GameObject fractObj = Instantiate(fracturedFruit, gameObject.transform.position, Quaternion.identity) as GameObject;
             Destroy(gameObject);
             fractObj.GetComponent<ExplodeFruitsScript>().ExplodeFruits();
-            if (isSurivalMode)
+            if (isSurivalMode && managerSurvival != null)
             {
                 managerSurvival.addScore(1);
             }
             else
             {
-                manager.addScore(1);
+                if (manager != null)
+                    manager.addScore(1);
             }
 
 

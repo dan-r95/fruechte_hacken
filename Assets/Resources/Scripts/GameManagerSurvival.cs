@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManagerSurvival : MonoBehaviour
 {
@@ -31,6 +31,10 @@ public class GameManagerSurvival : MonoBehaviour
 
     public GameObject startPos;
 
+    public GameObject avatar;
+
+    Scene current;
+
     void Awake()
     {
         scoreTxt = FindObjectOfType<ScoreScript>();
@@ -40,19 +44,23 @@ public class GameManagerSurvival : MonoBehaviour
         // QualitySettings.vSyncCount = 1;
         // Sync framerate to monitors refresh rate
         Application.targetFrameRate = 60;
-
+        current = SceneManager.GetActiveScene();
     }
     // Use this for initialization
     void Start()
     {
-        if (!runningGame)
-        {
-            //extralives.text="";
-            //headlineTxt.changeState(false);
 
-            //gameOverText = GameObject.Find("gameOverText");
-            //gameOverText.gameObject.SetActive(false);
-        }
+        StartCoroutine(StartGameAfterLoading());
+
+        //if (!runningGame)
+        //{
+        //extralives.text="";
+        //headlineTxt.changeState(false);
+
+        //gameOverText = GameObject.Find("gameOverText");
+        //gameOverText.gameObject.SetActive(false);
+
+        // }
     }
 
     // Update is called once per frame
@@ -62,14 +70,22 @@ public class GameManagerSurvival : MonoBehaviour
         {
             noclip = !noclip;
         }
-        if (Input.GetKeyDown(KeyCode.N) && !runningGame)
+        /* if (Input.GetKeyDown(KeyCode.N) && !runningGame)
         {
             newGame();
-        }
+        } */
         if (remaining_invulnarebility > 0)
             remaining_invulnarebility--;
         if (runningGame)
             Time.timeScale += 0.00001f; //speeding up the game
+    }
+
+    private IEnumerator StartGameAfterLoading()
+    {
+          yield return new WaitForSeconds(2f);
+        avatar.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        newGame();
     }
 
     public IEnumerator spawnBombs()
@@ -101,24 +117,28 @@ public class GameManagerSurvival : MonoBehaviour
 
     public void newGame()
     {
-        Debug.Log("New Game(Survival)");
-        // start the counter
-        //headlineTxt.changeState(false);
-        // dont display the header animation when game is started
-        //idleText = GameObject.Find("IdleText");
-        // idleText.gameObject.SetActive(false);
-        FruitSpawn fruitspawn = FindObjectOfType<FruitSpawn>();
-        fruitspawn.isSurvialMode = true;
-        fruitspawn.newGame();
 
-        addScore(-score);
-        turn = 0;
-        extralife = 0;
-        setExtralife(10);
-        runningGame = true;
-        Time.timeScale = 1;
-        //splashgroup.hideAllSplashImage();
-        StartCoroutine(spawnBombs());
+        if (current.name != "Time Mode" && current.name != "Main Menu")
+        {
+            Debug.Log("New Game(Survival)");
+            // start the counter
+            //headlineTxt.changeState(false);
+            // dont display the header animation when game is started
+            //idleText = GameObject.Find("IdleText");
+            // idleText.gameObject.SetActive(false);
+            FruitSpawn fruitspawn = FindObjectOfType<FruitSpawn>();
+            fruitspawn.isSurvialMode = true;
+            fruitspawn.newGame();
+
+            addScore(-score);
+            turn = 0;
+            extralife = 0;
+            setExtralife(10);
+            runningGame = true;
+            Time.timeScale = 1;
+            //splashgroup.hideAllSplashImage();
+            StartCoroutine(spawnBombs());
+        }
     }
     public void addScore(int i)
     {

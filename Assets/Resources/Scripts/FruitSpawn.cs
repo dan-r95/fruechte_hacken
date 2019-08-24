@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class FruitSpawn : MonoBehaviour
 {
@@ -27,7 +28,15 @@ public class FruitSpawn : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(StartGameAfterLoading());
 
+    }
+
+
+
+    private IEnumerator StartGameAfterLoading()
+    {
+        yield return new WaitForSeconds(3f);
         if (isSurvialMode)
         {
             managerSurvival = FindObjectOfType<GameManagerSurvival>();
@@ -54,7 +63,7 @@ public class FruitSpawn : MonoBehaviour
     {
         if (isSurvialMode)
         {
-            if (managerSurvival.runningGame)
+            if (managerSurvival != null && managerSurvival.runningGame)
             {
                 if ((Time.time - startTime) >= spawnTime)
                 {
@@ -66,7 +75,7 @@ public class FruitSpawn : MonoBehaviour
         }
         else
         {
-            if (manager.runningGame)
+            if (manager != null && manager.runningGame)
             {
                 if ((Time.time - startTime) >= spawnTime)
                 {
@@ -81,7 +90,6 @@ public class FruitSpawn : MonoBehaviour
 
     public void newGame()
     {
-
         //FindObjectOfType<FruitSpawn>().startTime = Time.time; // equal to this.startTime = Time.time?
         this.startTime = Time.time;
         waveTime = startWaveTime;
@@ -110,6 +118,7 @@ public class FruitSpawn : MonoBehaviour
                 randindex = Random.Range(0, spawnslotused.Length);
                 // use a different fruit each time
                 activeFruit = fruits[Random.Range(0, fruits.Count)];
+                Debug.Log(activeFruit.ToString());
                 activeFruit.GetComponent<Sphare>().isSurivalMode = true;
                 // set to random to layer to minimize colliding chance
                 activeFruit.gameObject.layer = Random.Range(10, 16);

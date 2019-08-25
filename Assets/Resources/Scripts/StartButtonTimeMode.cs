@@ -27,6 +27,6 @@ public class StartButtonTimeMode : MonoBehaviour
         audioManager.playStartSound();
         yield return new WaitForSeconds(1.5f);
         // darken the screen
-        SceneManager.LoadScene("TimeLimitMode");
+        SceneManager.LoadSceneAsync("TimeLimitMode");
     }
 }

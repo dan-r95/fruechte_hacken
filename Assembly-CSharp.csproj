@@ -69,6 +69,7 @@
      <Compile Include="Assets\Resources\Scripts\GameManagerSurvival.cs" />
      <Compile Include="Assets\Resources\Scripts\GrenadeExplode.cs" />
      <Compile Include="Assets\Resources\Scripts\headlineTxt.cs" />
+     <Compile Include="Assets\Resources\Scripts\HintManager.cs" />
      <Compile Include="Assets\Resources\Scripts\MoCapAnsteuerung.cs" />
      <Compile Include="Assets\Resources\Scripts\MoCapUtils.cs" />
      <Compile Include="Assets\Resources\Scripts\NameField.cs" />

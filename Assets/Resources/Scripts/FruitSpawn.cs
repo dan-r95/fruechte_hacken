@@ -18,7 +18,7 @@ public class FruitSpawn : MonoBehaviour
     public float startWaveTime = 2f;
     float waveTime;
     public float timeincrease = 0.04f;
-    int randindex, randindex_old = 0, spawnlimit;
+    int randindex,  spawnlimit;
     GameManager manager;
     GameManagerSurvival managerSurvival;
     bool[] spawnslotused;

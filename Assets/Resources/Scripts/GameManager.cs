@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject avatar;
 
+    public GameObject startPos;
+    public GameObject healthStartPos1, healthStartPos2;
+
     void Awake()
     {
         scoreTxt = FindObjectOfType<ScoreScript>();
@@ -67,6 +70,43 @@ public class GameManager : MonoBehaviour
         newGame();
     }
 
+
+    public IEnumerator spawnHealthItems()
+    {
+
+        // on motion detection spawn health item
+        yield return new WaitForSeconds(3f);
+
+        GameObject target0 = GameObject.Find("end");
+        GameObject target1 = GameObject.Find("end (1)");
+        GameObject target2 = GameObject.Find("end (2)");
+        int next = Random.Range(0, 1);
+        Vector3 pos;
+        if (next == 0)
+        {
+            pos = new Vector3(healthStartPos1.transform.position.x, healthStartPos1.transform.position.y, healthStartPos1.transform.position.z);
+        }
+        else
+        {
+            pos = new Vector3(healthStartPos2.transform.position.x, healthStartPos2.transform.position.y, healthStartPos2.transform.position.z);
+        }
+        GameObject bomb = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana 1 1"), pos, transform.rotation);
+
+        ThrowArcLike script = (ThrowArcLike)bomb.GetComponent<ThrowArcLike>();
+        script.firingAngle = 10f;
+
+        script.gravity = 4.1f;
+        int nextPlacement = Random.Range(0, 2);
+        switch (nextPlacement)
+        {
+            case 0: script.Target = target0.transform; break;
+            case 1: script.Target = target1.transform; break;
+            case 2: script.Target = target2.transform; break;
+        }
+        // script.shouldRotate = true;
+        StartCoroutine(script.SimulateProjectile());
+    }
+
     public void newGame()
     {
 
@@ -95,8 +135,9 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void showPowerUpBillboard(){
-        
+    public IEnumerator showPowerUpBillboard()
+    {
+        yield return new WaitForSeconds(3f);
     }
     public void addScore(int i)
     {

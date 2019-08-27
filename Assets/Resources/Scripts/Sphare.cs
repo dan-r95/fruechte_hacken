@@ -1,7 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System;
-using UnityEngine.Audio;
 
 public class Sphare : MonoBehaviour
 {

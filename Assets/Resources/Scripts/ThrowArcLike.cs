@@ -19,7 +19,7 @@ public class ThrowArcLike : MonoBehaviour
 
     void Start()
     {
-       
+
     }
 
     void Update()
@@ -36,7 +36,7 @@ public class ThrowArcLike : MonoBehaviour
 
     public IEnumerator SimulateProjectile()
     {
-        while (Projectile != null && Projectile.gameObject.activeInHierarchy)
+        while (Projectile.transform != null)
         {
             // Short delay added before Projectile is thrown
             yield return new WaitForSeconds(0.5f);
@@ -88,6 +88,8 @@ public class ThrowArcLike : MonoBehaviour
 
     private void OnDestroy()
     {
-        StopCoroutine(SimulateProjectile());
+        Debug.Log("Getting destroyed :/");
+        this.enabled = false;
+        StopAllCoroutines();
     }
 }

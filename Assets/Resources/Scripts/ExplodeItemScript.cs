@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 public class ExplodeItemScript : MonoBehaviour
@@ -13,7 +12,7 @@ public class ExplodeItemScript : MonoBehaviour
 
     public void ExplodeItem()
     {
-        if(particleEffect != null)
+        if (particleEffect != null)
         {
             GameObject particleEffectFX = Instantiate(particleEffect, transform.position + particleEffectOffset, Quaternion.identity) as GameObject;
             Destroy(particleEffectFX, 5);

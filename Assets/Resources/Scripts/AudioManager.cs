@@ -1,25 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
 
-    public AudioClip clip1;
-    public AudioClip clip2;
-
-    public AudioClip gong;
-
-    public AudioClip explosion;
-
-    public AudioClip clip3;
-
-    public AudioClip backgroundMusic;
+    public AudioClip clip1, clip2, gong, explosion, special, backgroundMusic, clip3;
     public AudioSource[] audiosources;
 
     System.Random r;
-
-    //public AudioSource audioSourceBackground;
 
     // Start is called before the first frame update
     void Start()
@@ -27,10 +15,6 @@ public class AudioManager : MonoBehaviour
         audiosources = GetComponents<AudioSource>();
         audiosources[0].clip = backgroundMusic;
         audiosources[0].Play();
-
-        // audioSourceBackground = GetComponent<AudioSource>();
-        //audioSourceBackground.clip = backgroundMusic;
-        //audioSourceBackground.Play();
 
         r = new System.Random();
     }
@@ -70,6 +54,12 @@ public class AudioManager : MonoBehaviour
     public void playExplosion()
     {
         audiosources[1].clip = explosion;
+        audiosources[1].Play();
+    }
+
+    public void playSpecialSound()
+    {
+        audiosources[1].clip = special;
         audiosources[1].Play();
     }
 }

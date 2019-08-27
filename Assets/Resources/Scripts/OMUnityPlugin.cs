@@ -1,7 +1,6 @@
 ﻿//Copyright 2013 Daniel Pots s64716 HTW Dresden
 
 using UnityEngine;
-using System.Collections;
 using System.Runtime.InteropServices;
 using System;
 

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ShowSplashImageCanvas : MonoBehaviour
@@ -24,7 +22,7 @@ public class ShowSplashImageCanvas : MonoBehaviour
         image7.enabled = false;
         image8.enabled = false;
         image9.enabled = false;
-        image10.enabled = false;
+        //image10.enabled = false;
     }
 
     // Update is called once per frame
@@ -63,7 +61,7 @@ public class ShowSplashImageCanvas : MonoBehaviour
                 Debug.Log("10");
                 gameOverText = GameObject.Find("gameOverText");
                 gameOverText.gameObject.SetActive(true);
-                image10.enabled = true;        
+                //image10.enabled = true;        
                 break;
             default:
                 break;

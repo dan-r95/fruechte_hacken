@@ -39,7 +39,7 @@ public class GrenadeExplode : MonoBehaviour
     }
     void Explode()
     {
-      
+
         Instantiate(explosionEffect, transform.position, transform.rotation);
         audioManager = FindObjectOfType<AudioManager>();
         audioManager.playExplosion();

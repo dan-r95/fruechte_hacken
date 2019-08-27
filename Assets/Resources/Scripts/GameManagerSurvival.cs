@@ -21,15 +21,13 @@ public class GameManagerSurvival : MonoBehaviour
     public Random rng;
     public int extralife;
     public int remaining_invulnarebility;
-    //public GameObject startbutton;
 
-    public GameObject idleText, gameOverText;
+    public GameObject gameOverText;
 
     public ShowSplashImageCanvas splashgroup;
 
-    public GameObject backToMenu;
-
     public GameObject startPos;
+    public GameObject healthStartPos1, healthStartPos2;
 
     public GameObject avatar;
 
@@ -51,16 +49,6 @@ public class GameManagerSurvival : MonoBehaviour
     {
 
         StartCoroutine(StartGameAfterLoading());
-
-        //if (!runningGame)
-        //{
-        //extralives.text="";
-        //headlineTxt.changeState(false);
-
-        //gameOverText = GameObject.Find("gameOverText");
-        //gameOverText.gameObject.SetActive(false);
-
-        // }
     }
 
     // Update is called once per frame
@@ -70,10 +58,6 @@ public class GameManagerSurvival : MonoBehaviour
         {
             noclip = !noclip;
         }
-        /* if (Input.GetKeyDown(KeyCode.N) && !runningGame)
-        {
-            newGame();
-        } */
         if (remaining_invulnarebility > 0)
             remaining_invulnarebility--;
         if (runningGame)
@@ -82,7 +66,7 @@ public class GameManagerSurvival : MonoBehaviour
 
     private IEnumerator StartGameAfterLoading()
     {
-          yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2f);
         avatar.SetActive(true);
         yield return new WaitForSeconds(3f);
         newGame();
@@ -115,17 +99,48 @@ public class GameManagerSurvival : MonoBehaviour
         StartCoroutine(script.SimulateProjectile());
     }
 
+    public IEnumerator spawnHealthItems()
+    {
+
+        // on motion detection spawn health item
+        yield return new WaitForSeconds(3f);
+
+        GameObject target0 = GameObject.Find("end");
+        GameObject target1 = GameObject.Find("end (1)");
+        GameObject target2 = GameObject.Find("end (2)");
+        int next = Random.Range(0, 1);
+        Vector3 pos;
+        if (next == 0)
+        {
+            pos = new Vector3(healthStartPos1.transform.position.x, healthStartPos1.transform.position.y, healthStartPos1.transform.position.z);
+        }
+        else
+        {
+            pos = new Vector3(healthStartPos2.transform.position.x, healthStartPos2.transform.position.y, healthStartPos2.transform.position.z);
+        }
+        GameObject bomb = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/asiabox"), pos, transform.rotation);
+
+        ThrowArcLike script = (ThrowArcLike)bomb.GetComponent<ThrowArcLike>();
+        script.firingAngle = 10f;
+
+        script.gravity = 4.1f;
+        int nextPlacement = Random.Range(0, 2);
+        switch (nextPlacement)
+        {
+            case 0: script.Target = target0.transform; break;
+            case 1: script.Target = target1.transform; break;
+            case 2: script.Target = target2.transform; break;
+        }
+        // script.shouldRotate = true;
+        StartCoroutine(script.SimulateProjectile());
+    }
+
     public void newGame()
     {
 
         if (current.name != "Time Mode" && current.name != "Main Menu")
         {
             Debug.Log("New Game(Survival)");
-            // start the counter
-            //headlineTxt.changeState(false);
-            // dont display the header animation when game is started
-            //idleText = GameObject.Find("IdleText");
-            // idleText.gameObject.SetActive(false);
             FruitSpawn fruitspawn = FindObjectOfType<FruitSpawn>();
             fruitspawn.isSurvialMode = true;
             fruitspawn.newGame();
@@ -136,8 +151,8 @@ public class GameManagerSurvival : MonoBehaviour
             setExtralife(10);
             runningGame = true;
             Time.timeScale = 1;
-            //splashgroup.hideAllSplashImage();
             StartCoroutine(spawnBombs());
+            StartCoroutine(spawnHealthItems());
         }
     }
     public void addScore(int i)

@@ -1,7 +1,4 @@
-﻿
-
-
- using System.Linq;
+﻿using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,12 +28,14 @@ public class SequentialAnimator : MonoBehaviour
     }
 
 
-    void OnEnable(){
+    void OnEnable()
+    {
         UpdateAnimatorList();
         StartCoroutine(Play());
     }
 
-     void OnDisable() {
+    void OnDisable()
+    {
         StopCoroutine(Play());
     }
 
@@ -84,7 +83,7 @@ public class SequentialAnimator : MonoBehaviour
                     yield return new WaitForSeconds(waitBetween);
                 }
             }
-            
+
             yield return new WaitForSeconds(waitEnd);
 
             if (alwaysReverseOnEnd)
@@ -98,4 +97,4 @@ public class SequentialAnimator : MonoBehaviour
     {
         animators = GetComponentsInChildren<Animator>().ToList();
     }
-} 
+}

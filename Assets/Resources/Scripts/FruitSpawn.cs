@@ -51,7 +51,6 @@ public class FruitSpawn : MonoBehaviour
         startTime = Time.time;
 
         fruits.Add(apple);
-        fruits.Add(banana);
         fruits.Add(cherry);
         fruits.Add(kiwi);
         fruits.Add(orange);

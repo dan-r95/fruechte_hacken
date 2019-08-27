@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
@@ -45,15 +44,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(StartGameAfterLoading());
-        // if (!runningGame)
-        //{
-        //extralives.text="";
-        //headlineTxt.changeState(false);
-        // idleText = GameObject.Find("IdleText");
-        // idleText.gameObject.SetActive(true);
-        //gameOverText = GameObject.Find("gameOverText");
-        //gameOverText.gameObject.SetActive(false);
-        //}
     }
 
     // Update is called once per frame
@@ -63,9 +53,6 @@ public class GameManager : MonoBehaviour
         {
             noclip = !noclip;
         }
-        /*  if (Input.GetKeyDown(KeyCode.N) && !runningGame)
-             newGame();
-  */
         if (remaining_invulnarebility > 0)
             remaining_invulnarebility--;
         if (runningGame)
@@ -106,6 +93,10 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1;
         }
 
+    }
+
+    public void showPowerUpBillboard(){
+        
     }
     public void addScore(int i)
     {

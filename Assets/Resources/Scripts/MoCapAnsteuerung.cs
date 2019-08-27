@@ -359,8 +359,6 @@ public class MoCapAnsteuerung : MonoBehaviour
 
                     Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
 
-
-                    float JumpSpeed = 5.0f;
                     //  Vector3 jump = new Vector3(0.0f, moveForward, 0.0f);
 
                     Rigidbody rb = (Rigidbody)AvatarRoot.GetComponent<Rigidbody>();

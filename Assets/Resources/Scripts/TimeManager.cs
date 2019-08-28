@@ -34,7 +34,7 @@ public class TimeManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSecondsRealtime(1);
             timeLeft--;
             if (timeLeft == 0)
             {

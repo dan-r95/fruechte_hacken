@@ -27,7 +27,7 @@ public class SpecialItemsBehaviour : MonoBehaviour
     {
         GameObject.Instantiate(fracturedFruit, gameObject.transform.position, transform.rotation);
         Destroy(gameObject);
-        //fractObj.GetComponent<ExplodeItemScript>().ExplodeItem();
+        fracturedObject.GetComponent<ExplodeItemScript>().ExplodeItem();
     }
 
     public void OnCollisionEnter(Collision collisionInfo)

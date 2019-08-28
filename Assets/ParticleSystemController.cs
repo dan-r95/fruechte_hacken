@@ -22,7 +22,7 @@ public class ParticleSystemController : MonoBehaviour
     private IEnumerator startParticlesAfterLoading()
     {
           // turn the particle system off at startup
-        yield return new WaitForSeconds(2); // wait for 5 seconds
+        yield return new WaitForSecondsRealtime(2); // wait for 5 seconds
         particleEmitter.Play(true); // turn the particle system on
     }
 

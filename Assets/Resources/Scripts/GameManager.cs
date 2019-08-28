@@ -23,8 +23,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject idleText, gameOverText;
 
-    public ShowSplashImageCanvas splashgroup;
-
     public Scene current;
 
     public GameObject avatar;
@@ -64,26 +62,28 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartGameAfterLoading()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(2f);
         avatar.SetActive(true);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSecondsRealtime(3f);
         newGame();
     }
 
 
-    public IEnumerator spawnPowerUps()
+    public void spawnPowerUp()
     {
+        GameObject target0 = GameObject.Find("Avatar"); //GameObject.Find("end");
+        GameObject target1 = GameObject.Find("Avatar");//GameObject.Find("end (1)");
+        GameObject target2 = GameObject.Find("Avatar"); //GameObject.Find("end (2)");
 
         // on motion detection spawn health item
-        yield return new WaitForSeconds(3f);
 
-        GameObject target0 = GameObject.Find("end");
-        GameObject target1 = GameObject.Find("end (1)");
-        GameObject target2 = GameObject.Find("end (2)");
+        Debug.Log("spawning new powerup");
         int next = Random.Range(0, 1);
         int nextPlacement = Random.Range(0, 2);
+        Debug.Log("nextplacement" + nextPlacement);
         Vector3 pos;
-        if (next == 0)
+        Debug.Log(next);
+        if (next == 1)
         {
             pos = new Vector3(healthStartPos1.transform.position.x, healthStartPos1.transform.position.y, healthStartPos1.transform.position.z);
         }
@@ -92,33 +92,39 @@ public class GameManager : MonoBehaviour
             pos = new Vector3(healthStartPos2.transform.position.x, healthStartPos2.transform.position.y, healthStartPos2.transform.position.z);
         }
 
-        GameObject bomb = new GameObject();
+        GameObject banana = new GameObject();
         switch (nextPlacement)
         {
-            case 0: bomb = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana yellow"), healthStartPos2.transform, true); break;
-            case 1: bomb = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana ice"), healthStartPos2.transform, true); break;
-            case 2: bomb = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana blue"), healthStartPos2.transform, true); break;
+            case 0: banana = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana yellow"), pos, transform.rotation); break;
+            case 1: banana = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana ice"), pos, transform.rotation); break;
+            case 2: banana = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana blue"), pos, transform.rotation); break;
         }
+        banana.gameObject.layer = Random.Range(10, 16);
 
-        ThrowArcLike script = (ThrowArcLike)bomb.GetComponent<ThrowArcLike>();
-        script.firingAngle = 10f;
+        ThrowArcLike script = (ThrowArcLike)banana.GetComponent<ThrowArcLike>();
+        script.firingAngle = 25f;
 
-        script.gravity = 4.1f;
-
-        switch (nextPlacement)
+        script.gravity = 6.1f;
+        if (target1 != null && target2 != null & target0 != null)
         {
-            case 0: script.Target = target0.transform; break;
-            case 1: script.Target = target1.transform; break;
-            case 2: script.Target = target2.transform; break;
+            nextPlacement = Random.Range(0, 2);
+            switch (nextPlacement)
+            {
+                case 0: script.Target = target0.transform; break;
+                case 1: script.Target = target1.transform; break;
+                case 2: script.Target = target2.transform; break;
+            }
+
+            // script.shouldRotate = true;
+            StartCoroutine(script.SimulateProjectile());
         }
-        // script.shouldRotate = true;
-        StartCoroutine(script.SimulateProjectile());
+        return;
     }
 
     public void newGame()
     {
 
-        if (current.name != "Time Mode" && current.name != "Main Menu")
+        if (current.name != "SurvivalMode" && current.name != "Main Menu")
         {
             Debug.Log("NEW  GAME(Time)");
             if (headlineTxt != null)
@@ -139,16 +145,23 @@ public class GameManager : MonoBehaviour
             timeManager.startTimer();
             runningGame = true;
             Time.timeScale = 1;
-
-         
-            StartCoroutine(spawnPowerUps());
+            StartCoroutine(spawnSpecialItems());
         }
 
     }
 
+    private IEnumerator spawnSpecialItems()
+    {
+        //while (runningGame)
+        //{
+            Debug.Log("Waiting");
+            yield return new WaitForSecondsRealtime(5.5f);
+            spawnPowerUp();
+        //}
+    }
     public IEnumerator showPowerUpBillboard()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSecondsRealtime(3f);
     }
     public void addScore(int i)
     {

@@ -30,7 +30,7 @@ public class BackToMainMenu : MonoBehaviour
     {
         audioManager = FindObjectOfType<AudioManager>();
         audioManager.playStartSound();
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSecondsRealtime(1.5f);
         SceneManager.LoadScene("Main Menu");
     }
 }

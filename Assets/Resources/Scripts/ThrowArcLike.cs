@@ -39,7 +39,7 @@ public class ThrowArcLike : MonoBehaviour
         while (Projectile.transform != null)
         {
             // Short delay added before Projectile is thrown
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSecondsRealtime(0.5f);
 
             // Move projectile to the position of throwing object + add some offset if needed.
             Projectile.position = myTransform.position + new Vector3(0, 0.0f, 0);
@@ -74,15 +74,18 @@ public class ThrowArcLike : MonoBehaviour
             // return to initital position
             Projectile.position = myTransform.position + new Vector3(0, 0.0f, 0);
 
-            //}
+            if (elapse_time >= 2 * flightDuration)
+            {
+                this.enabled = false;
+            }
             if (gameObject == null && !gameObject.activeInHierarchy)
             {
                 StopAllCoroutines();
             }
-            if (Projectile.gameObject == null && !Projectile.gameObject.activeInHierarchy)
-            {
-                StopAllCoroutines();
-            }
+            /*  if (Projectile.gameObject == null && !Projectile.gameObject.activeInHierarchy)
+             {
+                 StopAllCoroutines();
+             } */
         }
     }
 

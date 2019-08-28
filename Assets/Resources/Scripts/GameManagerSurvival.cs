@@ -66,9 +66,9 @@ public class GameManagerSurvival : MonoBehaviour
 
     private IEnumerator StartGameAfterLoading()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(2f);
         avatar.SetActive(true);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSecondsRealtime(3f);
         newGame();
     }
 
@@ -76,7 +76,7 @@ public class GameManagerSurvival : MonoBehaviour
     {
 
 
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSecondsRealtime(10f);
 
         GameObject target0 = GameObject.Find("end");
         GameObject target1 = GameObject.Find("end (1)");
@@ -103,7 +103,7 @@ public class GameManagerSurvival : MonoBehaviour
     {
 
         // on motion detection spawn health item
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSecondsRealtime(3f);
 
         GameObject target0 = GameObject.Find("end");
         GameObject target1 = GameObject.Find("end (1)");
@@ -138,7 +138,7 @@ public class GameManagerSurvival : MonoBehaviour
     public void newGame()
     {
 
-        if (current.name != "Time Mode" && current.name != "Main Menu")
+        if (current.name != "TimeLimitMode" && current.name != "Main Menu")
         {
             Debug.Log("New Game(Survival)");
             FruitSpawn fruitspawn = FindObjectOfType<FruitSpawn>();

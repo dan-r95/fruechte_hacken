@@ -3,6 +3,7 @@ using UnityEngine;
 using Ventuz.OSC;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Collections;
 
 public class MoCapAnsteuerung : MonoBehaviour
 {
@@ -46,6 +47,7 @@ public class MoCapAnsteuerung : MonoBehaviour
     private int posenumber = 0, previouspose = 0;
 
     private GameObject hat;
+    bool jumpEnabled = true;
 
     public void Awake()
     {
@@ -348,10 +350,10 @@ public class MoCapAnsteuerung : MonoBehaviour
                 }
 
                 //Jump on space
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Space) && jumpEnabled)
                 {
                     // Vector3 pos = new Vector3(AvatarRoot.transform.position.x, AvatarRoot.transform.position.y + 1, AvatarRoot.transform.position.z);
-
+                    StartCoroutine(enableJumping());
                     //AvatarRoot.transform.Translate(new Vector3(Input.GetAxis("Vertical") * 0.06f, 0, Input.GetAxis("Horizontal") * 0.03f));
                     float moveHorizontal = Input.GetAxis("Horizontal");
                     float moveVertical = Input.GetAxis("Vertical");
@@ -465,6 +467,13 @@ public class MoCapAnsteuerung : MonoBehaviour
 
         }
         #endregion
+    }
+
+    public IEnumerator enableJumping()
+    {
+        jumpEnabled = false;
+        yield return new WaitForSecondsRealtime(1.1f);
+        jumpEnabled = true;
     }
 
     //Allowing to Save/Load Avatars Base Position from MoCap to OfflineVersion

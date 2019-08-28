@@ -36,7 +36,7 @@ public class FruitSpawn : MonoBehaviour
 
     private IEnumerator StartGameAfterLoading()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSecondsRealtime(3f);
         if (isSurvialMode)
         {
             managerSurvival = FindObjectOfType<GameManagerSurvival>();

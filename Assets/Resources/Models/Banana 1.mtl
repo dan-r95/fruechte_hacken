@@ -1,21 +1,22 @@
-# File produced by Open Asset Import Library (http://www.assimp.sf.net)
-# (assimp v3.1.151580502)
+# Blender MTL File: 'None'
+# Material Count: 2
 
 newmtl 02___Default
-kd 0.9882 1 0.1255
-ka 1 1 1
-ks 0 0 0
-ke 0 0 0
-d 1
-Ns 40
-illum 2
+Ns 40.000007
+Ka 1.000000 1.000000 1.000000
+Kd 0.988200 1.000000 0.125500
+Ks 0.000000 0.000000 0.000000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 1
 
 newmtl 03___Default
-kd 0.0314 0.0314 0.0314
-ka 1 1 1
-ks 0 0 0
-ke 0 0 0
-d 1
-Ns 40
-illum 2
-
+Ns 40.000007
+Ka 1.000000 1.000000 1.000000
+Kd 0.031400 0.031400 0.031400
+Ks 0.000000 0.000000 0.000000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 1

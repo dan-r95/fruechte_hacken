@@ -6,18 +6,24 @@ ModelImporter:
     100000: //RootNode
     100002: Cylinder004
     100004: Banana_Banana
+    100006: default
     400000: //RootNode
     400002: Cylinder004
     400004: Banana_Banana
+    400006: default
     2100000: 02___Default
     2100002: 03___Default
     2100004: Banana_BananaMat
+    2100006: defaultMat
     2300000: Cylinder004
     2300002: Banana_Banana
+    2300004: default
     3300000: Cylinder004
     3300002: Banana_Banana
+    3300004: default
     4300000: Cylinder004
     4300002: Banana_Banana
+    4300004: default
   externalObjects: {}
   materials:
     importMaterials: 1

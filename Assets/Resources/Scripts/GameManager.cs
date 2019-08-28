@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public IEnumerator spawnHealthItems()
+    public IEnumerator spawnPowerUps()
     {
 
         // on motion detection spawn health item
@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
         GameObject target1 = GameObject.Find("end (1)");
         GameObject target2 = GameObject.Find("end (2)");
         int next = Random.Range(0, 1);
+        int nextPlacement = Random.Range(0, 2);
         Vector3 pos;
         if (next == 0)
         {
@@ -90,13 +91,20 @@ public class GameManager : MonoBehaviour
         {
             pos = new Vector3(healthStartPos2.transform.position.x, healthStartPos2.transform.position.y, healthStartPos2.transform.position.z);
         }
-        GameObject bomb = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana 1 1"), pos, transform.rotation);
+
+        GameObject bomb = new GameObject();
+        switch (nextPlacement)
+        {
+            case 0: bomb = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana yellow"), healthStartPos2.transform, true); break;
+            case 1: bomb = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana ice"), healthStartPos2.transform, true); break;
+            case 2: bomb = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana blue"), healthStartPos2.transform, true); break;
+        }
 
         ThrowArcLike script = (ThrowArcLike)bomb.GetComponent<ThrowArcLike>();
         script.firingAngle = 10f;
 
         script.gravity = 4.1f;
-        int nextPlacement = Random.Range(0, 2);
+
         switch (nextPlacement)
         {
             case 0: script.Target = target0.transform; break;
@@ -131,6 +139,9 @@ public class GameManager : MonoBehaviour
             timeManager.startTimer();
             runningGame = true;
             Time.timeScale = 1;
+
+         
+            StartCoroutine(spawnPowerUps());
         }
 
     }

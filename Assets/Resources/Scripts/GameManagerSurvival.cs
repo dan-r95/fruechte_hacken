@@ -118,7 +118,7 @@ public class GameManagerSurvival : MonoBehaviour
         {
             pos = new Vector3(healthStartPos2.transform.position.x, healthStartPos2.transform.position.y, healthStartPos2.transform.position.z);
         }
-        GameObject bomb = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana 1 1"), pos, transform.rotation);
+        GameObject bomb = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/asiabox"), pos, transform.rotation);
         Debug.Log(bomb.gameObject.transform.position.ToString());
         ThrowArcLike script = (ThrowArcLike)bomb.GetComponent<ThrowArcLike>();
         script.firingAngle = 10f;

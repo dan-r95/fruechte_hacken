@@ -41,13 +41,14 @@ public class GameManagerSurvival : MonoBehaviour
         headlineTxt = FindObjectOfType<headlineTxt>();
         // QualitySettings.vSyncCount = 1;
         // Sync framerate to monitors refresh rate
-        Application.targetFrameRate = 60;
         current = SceneManager.GetActiveScene();
     }
     // Use this for initialization
     void Start()
     {
-
+        // Turn off v-sync
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
         StartCoroutine(StartGameAfterLoading());
     }
 

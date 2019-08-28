@@ -24,8 +24,8 @@ public class ThrowArcLike : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.X))
-            StartCoroutine(SimulateProjectile());
+       /*  if (Input.GetKey(KeyCode.X))
+            StartCoroutine(SimulateProjectile()); */
         if (shouldRotate)
         {
             Projectile.Rotate(new Vector3(0, 0, 0.8f));
@@ -74,18 +74,18 @@ public class ThrowArcLike : MonoBehaviour
             // return to initital position
             Projectile.position = myTransform.position + new Vector3(0, 0.0f, 0);
 
-            if (elapse_time >= 2 * flightDuration)
+            /* if (elapse_time >= 2 * flightDuration)
             {
                 this.enabled = false;
-            }
+            } */
             if (gameObject == null && !gameObject.activeInHierarchy)
             {
                 StopAllCoroutines();
             }
-            /*  if (Projectile.gameObject == null && !Projectile.gameObject.activeInHierarchy)
+              if (Projectile.gameObject == null && !Projectile.gameObject.activeInHierarchy)
              {
                  StopAllCoroutines();
-             } */
+             } 
         }
     }
 

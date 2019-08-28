@@ -38,12 +38,14 @@ public class GameManager : MonoBehaviour
         headlineTxt = FindObjectOfType<headlineTxt>();
         // QualitySettings.vSyncCount = 1;
         // Sync framerate to monitors refresh rate
-        Application.targetFrameRate = 60;
         current = SceneManager.GetActiveScene();
     }
     // Use this for initialization
     void Start()
     {
+        // Turn off v-sync
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
         StartCoroutine(StartGameAfterLoading());
     }
 
@@ -71,9 +73,9 @@ public class GameManager : MonoBehaviour
 
     public void spawnPowerUp()
     {
-        GameObject target0 = GameObject.Find("Avatar"); //GameObject.Find("end");
-        GameObject target1 = GameObject.Find("Avatar");//GameObject.Find("end (1)");
-        GameObject target2 = GameObject.Find("Avatar"); //GameObject.Find("end (2)");
+        GameObject target0 = GameObject.Find("end"); //GameObject.Find("end");
+        GameObject target1 = GameObject.Find("end (1)");//GameObject.Find("end (1)");
+        GameObject target2 = GameObject.Find("end (2)"); //GameObject.Find("end (2)");
 
         // on motion detection spawn health item
 
@@ -92,14 +94,9 @@ public class GameManager : MonoBehaviour
             pos = new Vector3(healthStartPos2.transform.position.x, healthStartPos2.transform.position.y, healthStartPos2.transform.position.z);
         }
 
-        GameObject banana = new GameObject();
-        switch (nextPlacement)
-        {
-            case 0: banana = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana yellow"), pos, transform.rotation); break;
-            case 1: banana = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana ice"), pos, transform.rotation); break;
-            case 2: banana = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana blue"), pos, transform.rotation); break;
-        }
-        banana.gameObject.layer = Random.Range(10, 16);
+
+        GameObject banana = switchBananas(nextPlacement, pos);
+
 
         ThrowArcLike script = (ThrowArcLike)banana.GetComponent<ThrowArcLike>();
         script.firingAngle = 25f;
@@ -116,9 +113,25 @@ public class GameManager : MonoBehaviour
             }
 
             // script.shouldRotate = true;
-            StartCoroutine(script.SimulateProjectile());
+            script.SimulateProjectile();
         }
+        Debug.Log("exiting the spawn poweriu");
         return;
+    }
+
+    public GameObject switchBananas(int nextPlacement, Vector3 pos)
+    {
+        GameObject banana = new GameObject();
+        switch (nextPlacement)
+        {
+            case 0: banana = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana yellow"), pos, transform.rotation); break;
+            case 1: banana = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana ice"), pos, transform.rotation); break;
+            case 2: banana = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana blue"), pos, transform.rotation); break;
+        }
+        banana.gameObject.layer = Random.Range(10, 16);
+        Debug.Log("spawn bananana");
+        Debug.Log(banana.gameObject.layer);
+        return banana;
     }
 
     public void newGame()
@@ -154,9 +167,12 @@ public class GameManager : MonoBehaviour
     {
         //while (runningGame)
         //{
-            Debug.Log("Waiting");
-            yield return new WaitForSecondsRealtime(5.5f);
-            spawnPowerUp();
+        Debug.Log("Waiting");
+        yield return new WaitForSecondsRealtime(5.5f);
+        spawnPowerUp();
+        Debug.Log("done spawn");
+        yield return new WaitForSecondsRealtime(5.5f);
+          Debug.Log("done wait 2");
         //}
     }
     public IEnumerator showPowerUpBillboard()

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManagerSurvival : MonoBehaviour
 {
 
-    public float speed = 1f;
+    public float speed = 0.8f;
     private float startTime, journeyLength;
     public bool runningGame = false;
     public bool noclip = false;
@@ -120,7 +120,7 @@ public class GameManagerSurvival : MonoBehaviour
             pos = new Vector3(healthStartPos2.transform.position.x, healthStartPos2.transform.position.y, healthStartPos2.transform.position.z);
         }
         GameObject bomb = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/asiabox"), pos, transform.rotation);
-        Debug.Log(bomb.gameObject.transform.position.ToString());
+        bomb.gameObject.layer = 0;
         ThrowArcLike script = (ThrowArcLike)bomb.GetComponent<ThrowArcLike>();
         script.firingAngle = 10f;
 

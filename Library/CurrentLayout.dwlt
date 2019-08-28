@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 514}
+  m_MinSize: {x: 950, y: 548}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -45,7 +45,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 950, y: 514}
+  m_MinSize: {x: 950, y: 548}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -111,10 +111,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 881, y: 464}
-  m_MaxSize: {x: 16006, y: 8048}
+  m_MinSize: {x: 881, y: 498}
+  m_MaxSize: {x: 18008, y: 14048}
   vertical: 0
-  controlID: 1259
+  controlID: 11875
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -136,10 +136,10 @@ MonoBehaviour:
     y: 0
     width: 1364
     height: 947
-  m_MinSize: {x: 604, y: 464}
-  m_MaxSize: {x: 12004, y: 8048}
+  m_MinSize: {x: 604, y: 498}
+  m_MaxSize: {x: 14006, y: 14048}
   vertical: 1
-  controlID: 1260
+  controlID: 11876
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_MinSize: {x: 604, y: 224}
   m_MaxSize: {x: 12004, y: 4024}
   vertical: 0
-  controlID: 1261
+  controlID: 11877
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -267,10 +267,10 @@ MonoBehaviour:
     y: 605
     width: 1364
     height: 342
-  m_MinSize: {x: 364, y: 240}
-  m_MaxSize: {x: 8004, y: 4024}
+  m_MinSize: {x: 496, y: 274}
+  m_MaxSize: {x: 14006, y: 10024}
   vertical: 0
-  controlID: 1288
+  controlID: 11990
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -290,15 +290,15 @@ MonoBehaviour:
     y: 0
     width: 638
     height: 342
-  m_MinSize: {x: 102, y: 124}
-  m_MaxSize: {x: 4002, y: 4024}
-  m_ActualView: {fileID: 21}
+  m_MinSize: {x: 232, y: 274}
+  m_MaxSize: {x: 10002, y: 10024}
+  m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
   - {fileID: 21}
   - {fileID: 22}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -462,9 +462,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 749bffff
+      m_SelectedIDs: 560c0000
       m_LastClickedID: 0
-      m_ExpandedIDs: f2900000
+      m_ExpandedIDs: 12b3fbff8224fdff8ca0feffd4fbffffd4280000f6280000fe2800007e7f0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -515,14 +515,14 @@ MonoBehaviour:
     height: 585
   m_PersistentViewDataDictionary: {fileID: 0}
   m_WindowGUID: 901b482c2b6c4994db6f348cc1ec4a12
-  m_SceneLighting: 0
+  m_SceneLighting: 1
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.61697316, y: 1.1896187, z: 0.32573327}
+    m_Target: {x: -10.291539, y: 2.5503683, z: 0.033207297}
     speed: 2
-    m_Value: {x: 0.61697316, y: 1.1896187, z: 0.32573327}
+    m_Value: {x: -10.291539, y: 2.5503683, z: 0.033207297}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -550,13 +550,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.017117675, y: 0.9676295, z: -0.24234073, w: -0.06834613}
+    m_Target: {x: 0.25050604, y: -0.6281794, z: 0.22426851, w: 0.7016703}
     speed: 2
-    m_Value: {x: -0.017117675, y: 0.9676295, z: -0.24234073, w: -0.06834613}
+    m_Value: {x: 0.25050604, y: -0.6281794, z: 0.22426851, w: 0.7016703}
   m_Size:
-    m_Target: 0.5204233
+    m_Target: 13.077722
     speed: 2
-    m_Value: 0.5204233
+    m_Value: 13.077722
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -695,20 +695,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Materials/Gong
+    - Assets
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Resources/Materials/Gong
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\dross\Documents\fruechte_hacken
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 111}
-    m_SelectedIDs: 26910000
-    m_LastClickedID: 37158
-    m_ExpandedIDs: 00000000a02800000429000078290000022c0000e82d00001c2f0000b04000009290000000ca9a3b
+    scrollPos: {x: 0, y: 95}
+    m_SelectedIDs: f80b0000
+    m_LastClickedID: 3064
+    m_ExpandedIDs: 00000000f80b00005c0c0000d20c0000600f000056110000941200002c240000844e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -736,7 +736,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000a02800000429000078290000022c0000e82d00001c2f0000b04000009290000000ca9a3b
+    m_ExpandedIDs: 00000000f80b00005c0c0000d20c0000600f000056110000941200002c240000844e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -761,10 +761,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 749bffff
-    m_LastClickedInstanceID: -25740
-    m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: 28060000a427000080290000ce270000d6620000f20e000000000000404b00003c500000aa4e0000
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
+    m_HadKeyboardFocusLastEvent: 0
+    m_ExpandedInstanceIDs: 28060000a427000080290000ce270000d6620000f20e000000000000404b00003c500000aa4e0000ca9400002edb0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -788,7 +788,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 19}
     m_GridSize: 16
   m_DirectoriesAreaWidth: 253
 --- !u!114 &21
@@ -845,7 +845,7 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 655420
+  m_LastSelectedObjectID: -210252
 --- !u!114 &23
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -873,7 +873,7 @@ MonoBehaviour:
     height: 322
   m_PersistentViewDataDictionary: {fileID: 0}
   m_VertSplit:
-    ID: 1306
+    ID: 12008
     splitterInitialOffset: 0
     currentActiveSplitter: -1
     realSizes: 9900000099000000

@@ -1,0 +1,170 @@
+fileFormatVersion: 2
+guid: b75b7507390a51545969084ceda3ba21
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: ginger_piece
+    100004: ginger_piece1
+    100006: ginger_piece2
+    100008: ginger_piece3
+    100010: ginger_piece4
+    100012: plate
+    100014: roll_piece
+    100016: roll_piece1
+    100018: roll_piece2
+    100020: roll_piece3
+    100022: roll_piece4
+    100024: roll_piece5
+    100026: roll_piece6
+    100028: roll_piece7
+    100030: wasabi
+    400000: //RootNode
+    400002: ginger_piece
+    400004: ginger_piece1
+    400006: ginger_piece2
+    400008: ginger_piece3
+    400010: ginger_piece4
+    400012: plate
+    400014: roll_piece
+    400016: roll_piece1
+    400018: roll_piece2
+    400020: roll_piece3
+    400022: roll_piece4
+    400024: roll_piece5
+    400026: roll_piece6
+    400028: roll_piece7
+    400030: wasabi
+    2100000: _sushi_rollsushi_roll_lambert2SG
+    2100002: _sushi_rollsushi_roll_blinn1SG
+    2300000: ginger_piece
+    2300002: ginger_piece1
+    2300004: ginger_piece2
+    2300006: ginger_piece3
+    2300008: ginger_piece4
+    2300010: plate
+    2300012: roll_piece
+    2300014: roll_piece1
+    2300016: roll_piece2
+    2300018: roll_piece3
+    2300020: roll_piece4
+    2300022: roll_piece5
+    2300024: roll_piece6
+    2300026: roll_piece7
+    2300028: wasabi
+    3300000: ginger_piece
+    3300002: ginger_piece1
+    3300004: ginger_piece2
+    3300006: ginger_piece3
+    3300008: ginger_piece4
+    3300010: plate
+    3300012: roll_piece
+    3300014: roll_piece1
+    3300016: roll_piece2
+    3300018: roll_piece3
+    3300020: roll_piece4
+    3300022: roll_piece5
+    3300024: roll_piece6
+    3300026: roll_piece7
+    3300028: wasabi
+    4300000: ginger_piece
+    4300002: ginger_piece1
+    4300004: ginger_piece2
+    4300006: ginger_piece3
+    4300008: ginger_piece4
+    4300010: plate
+    4300012: roll_piece
+    4300014: roll_piece1
+    4300016: roll_piece2
+    4300018: roll_piece3
+    4300020: roll_piece4
+    4300022: roll_piece5
+    4300024: roll_piece6
+    4300026: roll_piece7
+    4300028: wasabi
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

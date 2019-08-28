@@ -33,15 +33,16 @@ public class GameManagerSurvival : MonoBehaviour
 
     Scene current;
 
+    HintManager hintManager;
+
     void Awake()
     {
         scoreTxt = FindObjectOfType<ScoreScript>();
         button1 = FindObjectOfType<StartButtonTimeMode>();
         button2 = FindObjectOfType<StartButtonSurvivalMode>();
         headlineTxt = FindObjectOfType<headlineTxt>();
-        // QualitySettings.vSyncCount = 1;
-        // Sync framerate to monitors refresh rate
         current = SceneManager.GetActiveScene();
+        hintManager = FindObjectOfType<HintManager>();
     }
     // Use this for initialization
     void Start()
@@ -67,10 +68,15 @@ public class GameManagerSurvival : MonoBehaviour
 
     private IEnumerator StartGameAfterLoading()
     {
+        hintManager.showInfoText();
+        hintManager.hideScoreText();
         yield return new WaitForSecondsRealtime(2f);
         avatar.SetActive(true);
+        hintManager.showGoText();
         yield return new WaitForSecondsRealtime(3f);
+        hintManager.showScoreText();
         newGame();
+
     }
 
     public IEnumerator spawnBombs()

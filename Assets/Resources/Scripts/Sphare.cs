@@ -43,41 +43,43 @@ public class Sphare : MonoBehaviour
                     {
                         managerSurvival.addExtralife(-1);
                     }
-
-                    switch (managerSurvival.extralife)
+                    if (splashimage != null)
                     {
-                        case 0:
-                            splashimage.image10.enabled = true;
-                            break;
-                        case 1:
-                            splashimage.image9.enabled = true;
-                            break;
-                        case 2:
-                            splashimage.image8.enabled = true;
-                            break;
-                        case 3:
-                            splashimage.image7.enabled = true;
-                            break;
-                        case 4:
-                            splashimage.image6.enabled = true;
-                            break;
-                        case 5:
-                            splashimage.image5.enabled = true;
-                            break;
-                        case 6:
-                            splashimage.image4.enabled = true;
-                            break;
-                        case 7:
-                            splashimage.image3.enabled = true;
-                            break;
-                        case 8:
-                            splashimage.image2.enabled = true;
-                            break;
-                        case 9:
-                            splashimage.image1.enabled = true;
-                            break;
-                        default:
-                            break;
+                        switch (managerSurvival.extralife)
+                        {
+                            case 0:
+                                splashimage.image10.enabled = true;
+                                break;
+                            case 1:
+                                splashimage.image9.enabled = true;
+                                break;
+                            case 2:
+                                splashimage.image8.enabled = true;
+                                break;
+                            case 3:
+                                splashimage.image7.enabled = true;
+                                break;
+                            case 4:
+                                splashimage.image6.enabled = true;
+                                break;
+                            case 5:
+                                splashimage.image5.enabled = true;
+                                break;
+                            case 6:
+                                splashimage.image4.enabled = true;
+                                break;
+                            case 7:
+                                splashimage.image3.enabled = true;
+                                break;
+                            case 8:
+                                splashimage.image2.enabled = true;
+                                break;
+                            case 9:
+                                splashimage.image1.enabled = true;
+                                break;
+                            default:
+                                break;
+                        }
                     }
 
                 }

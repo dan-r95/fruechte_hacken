@@ -105,6 +105,7 @@ public class GameManager : MonoBehaviour
         if (target1 != null && target2 != null & target0 != null)
         {
             nextPlacement = Random.Range(0, 2);
+            Debug.Log(nextPlacement);
             switch (nextPlacement)
             {
                 case 0: script.Target = target0.transform; break;
@@ -113,10 +114,10 @@ public class GameManager : MonoBehaviour
             }
 
             // script.shouldRotate = true;
-            script.SimulateProjectile();
+            StartCoroutine(script.SimulateProjectile());
         }
         Debug.Log("exiting the spawn poweriu");
-        return;
+
     }
 
     public GameObject switchBananas(int nextPlacement, Vector3 pos)
@@ -165,15 +166,15 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator spawnSpecialItems()
     {
-        //while (runningGame)
-        //{
-        Debug.Log("Waiting");
-        yield return new WaitForSecondsRealtime(5.5f);
-        spawnPowerUp();
-        Debug.Log("done spawn");
-        yield return new WaitForSecondsRealtime(5.5f);
-          Debug.Log("done wait 2");
-        //}
+        while (runningGame)
+        {
+            Debug.Log("Waiting");
+            yield return new WaitForSecondsRealtime(5.5f);
+            spawnPowerUp();
+            Debug.Log("done spawn");
+            yield return new WaitForSecondsRealtime(5.5f);
+            Debug.Log("done wait 2");
+        }
     }
     public IEnumerator showPowerUpBillboard()
     {

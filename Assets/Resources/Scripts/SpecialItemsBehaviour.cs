@@ -12,22 +12,26 @@ public class SpecialItemsBehaviour : MonoBehaviour
     AudioManager audioManager;
     GameManagerSurvival managerSurvival;
     GameManager manager;
+    HintManager hintManager;
 
     // Start is called before the first frame update  void Start()
     void Start()
     {
-        Debug.Log("calling script");
+
+        hintManager = FindObjectOfType<HintManager>();
+
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     void Update()
     {
-       
-          
-            if (gameObject == null && !gameObject.activeInHierarchy)
-            {
-                Debug.Log("disable");
-                this.enabled = false;
-            }
+
+
+        if (gameObject == null && !gameObject.activeInHierarchy)
+        {
+            Debug.Log("disable");
+            this.enabled = false;
+        }
     }
 
     public void SpawnFracturedObject()
@@ -44,8 +48,7 @@ public class SpecialItemsBehaviour : MonoBehaviour
         {
             Debug.Log("Collided!");
             SpawnFracturedObject();
-
-            audioManager = FindObjectOfType<AudioManager>();
+            hintManager.showMultiplierText();
             audioManager.playSpecialSound();
             if (managerSurvival != null)
             {

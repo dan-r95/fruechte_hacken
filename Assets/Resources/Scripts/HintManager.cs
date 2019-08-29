@@ -23,7 +23,6 @@ public class HintManager : MonoBehaviour
 
     public IEnumerator FlashLabel()
     {
-
         // Fancy pants flash of label on and off   
         while (true)
         {
@@ -35,24 +34,12 @@ public class HintManager : MonoBehaviour
 
     }
 
-    void OnGUI()
-    {
-
-        if (displayLabel == true)
-            GUILayout.Label("I AM FLASHING");
-
-    }
-
     // Update is called once per frame
     void Update()
     {
 
     }
 
-    public void showMultiplierText()
-    {
-        //  StartCoroutine(FlashLabel(multiplierText));
-    }
 
     public void showIdleText()
     {
@@ -64,14 +51,40 @@ public class HintManager : MonoBehaviour
 
     }
 
+    public IEnumerator FlashLabel(GameObject obj)
+    {
+        int i = 0;
+        while (true)
+        {
+            if (obj.activeSelf)
+            {
+                obj.SetActive(false);
+            }
+            else
+            {
+                obj.SetActive(true);
+            }
+            yield return new WaitForSeconds(0.5f);
+            i++;
+            if (i > 20) break;
+
+        }
+    }
+
+
+    public void showMultiplierText()
+    {
+        StartCoroutine(FlashLabel(multiplierText));
+    }
+
     public void showFrenzyText()
     {
-        // StartCoroutine(FlashLabel(frenzyText));
+        StartCoroutine(FlashLabel(frenzyText));
     }
 
     public void showSlowMoText()
     {
-        //StartCoroutine(FlashLabel(freezeText));
+        StartCoroutine(FlashLabel(freezeText));
     }
 
     public void showInfoText()

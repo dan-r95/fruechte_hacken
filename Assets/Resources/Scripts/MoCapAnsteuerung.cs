@@ -89,14 +89,14 @@ public class MoCapAnsteuerung : MonoBehaviour
             {
                 sphere[i] = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/SphereCollider"), new Vector3(0f, 0f, 0f), Quaternion.identity); //Sphären Instanzieren und Erstellen
             }
-            if (i == 15)
+           /*  if (i == 15)
             {
                 knife1 = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Knife_01 (1)"), sphere[15].transform.localPosition, Quaternion.identity); // spawn knife
             }
             if (i == 20)
             {
                 knife2 = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Knife_01 (1)"), sphere[20].transform.localPosition, Quaternion.identity); // spawn knife
-            }
+            } */
             else
                 sphere[i] = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Sphere"), new Vector3(0f, 0f, 0f), Quaternion.identity); //Sphären Instanzieren und Erstellen
             sphere[i].transform.parent = AvatarRoot;
@@ -292,13 +292,13 @@ public class MoCapAnsteuerung : MonoBehaviour
             hat.transform.position = pos;
             hat.transform.rotation = sphere[9].transform.localRotation;
 
-            // set knifes to specific position and rotation
+           /*  // set knifes to specific position and rotation
             Vector3 pos1 = new Vector3(sphere[15].transform.position.x, sphere[15].transform.position.y, sphere[15].transform.position.z);
             knife1.transform.position = pos1;
             knife1.transform.rotation = sphere[15].transform.localRotation;
             Vector3 pos2 = new Vector3(sphere[20].transform.position.x, sphere[20].transform.position.y, sphere[20].transform.position.z);
             knife2.transform.position = pos2;
-            knife2.transform.rotation = sphere[20].transform.localRotation;
+            knife2.transform.rotation = sphere[20].transform.localRotation; */
         }
 
 

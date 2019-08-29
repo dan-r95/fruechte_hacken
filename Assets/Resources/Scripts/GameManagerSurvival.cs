@@ -70,11 +70,11 @@ public class GameManagerSurvival : MonoBehaviour
     {
         hintManager.showInfoText();
         hintManager.hideScoreText();
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(2.5f);
         avatar.SetActive(true);
         hintManager.showGoText();
-        yield return new WaitForSecondsRealtime(3f);
         hintManager.showScoreText();
+        yield return new WaitForSecondsRealtime(3f);
         newGame();
 
     }

@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     public GameObject startPos;
     public GameObject healthStartPos1, healthStartPos2;
 
+    HintManager hintManager;
+
     void Awake()
     {
         scoreTxt = FindObjectOfType<ScoreScript>();
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
         // QualitySettings.vSyncCount = 1;
         // Sync framerate to monitors refresh rate
         current = SceneManager.GetActiveScene();
+        hintManager = FindObjectOfType<HintManager>();
     }
     // Use this for initialization
     void Start()
@@ -64,8 +67,12 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartGameAfterLoading()
     {
-        yield return new WaitForSecondsRealtime(2f);
+        hintManager.showInfoText();
+        hintManager.hideScoreText();
+        yield return new WaitForSecondsRealtime(2.5f);
         avatar.SetActive(true);
+        hintManager.showGoText();
+        hintManager.showScoreText();
         yield return new WaitForSecondsRealtime(3f);
         newGame();
     }
@@ -73,6 +80,7 @@ public class GameManager : MonoBehaviour
 
     public void spawnPowerUp()
     {
+        hintManager.showFrenzyText();
         GameObject target0 = GameObject.Find("end"); //GameObject.Find("end");
         GameObject target1 = GameObject.Find("end (1)");//GameObject.Find("end (1)");
         GameObject target2 = GameObject.Find("end (2)"); //GameObject.Find("end (2)");
@@ -176,10 +184,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("done wait 2");
         }
     }
-    public IEnumerator showPowerUpBillboard()
-    {
-        yield return new WaitForSecondsRealtime(3f);
-    }
+
     public void addScore(int i)
     {
         score += i;

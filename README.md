@@ -5,6 +5,8 @@ Fuer das Modul FcA 2019. Unity Version: 2018.3.5f1
 * Requires Unity 2018.3.5.f1 !!
 * Build for linux and windows
 
+![Overview](screenshot.png)
+
 ## Mein Beitrag
 
 2 Unterschiedliche Spielmodi mit jeweils neuem Setting (Environment): Arcade Mode (Asiatischer Jungle) und Survival Mode (Wüstensetting).

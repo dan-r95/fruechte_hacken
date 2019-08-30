@@ -28,6 +28,7 @@ public class FruitSpawn : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
         StartCoroutine(StartGameAfterLoading());
 
     }
@@ -55,6 +56,7 @@ public class FruitSpawn : MonoBehaviour
         fruits.Add(kiwi);
         fruits.Add(orange);
         fruits.Add(peach);
+        fruits.Add(banana);
     }
 
     // Update is called once per frame

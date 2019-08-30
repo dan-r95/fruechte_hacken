@@ -1,15 +1,22 @@
 # Fruit Ninja V2
 
-Fuer das Modul FcA 2019. Unity Version: 2018.3.5f1
+Für das Modul FcA 2019. Unity Version: 2018.3.5f1
 
 * Requires Unity 2018.3.5.f1 !!
 * Build for linux and windows
 
-![Overview](screenshot.png)
+<img src="markdown/screenshot3.png" width="700">
 
 ## Mein Beitrag
 
-2 Unterschiedliche Spielmodi mit jeweils neuem Setting (Environment): Arcade Mode (Asiatischer Jungle) und Survival Mode (Wüstensetting).
+2 Unterschiedliche Spielmodi mit jeweils neuem Setting (Environment):
+**Arcade Mode (Asiatischer Jungle)**
+
+<img src="markdown/screenshot2.png" width="700">
+
+ und **Survival Mode (Wüstensetting)**
+ 
+<img src="markdown/screenshot.png" width="700">
 
 * Arcade Mode: Zerstöre so viele Früchte wie du kannst in 100s. Über Bonus Items die zufällig spawnen und eingesammelt werden müssen, können Effekte wie Multiplier, Frenzy (mehr Spawns) sowie Freeze (Zeitverlangsamung) erreicht werden.
 

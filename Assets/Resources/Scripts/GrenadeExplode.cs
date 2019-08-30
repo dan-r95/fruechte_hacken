@@ -31,7 +31,7 @@ public class GrenadeExplode : MonoBehaviour
             Debug.Log("Boom");
             // deduct 3 lives when bomb hits
             managerSurvival = FindObjectOfType<GameManagerSurvival>();
-            managerSurvival.addExtralife(-3);
+            managerSurvival.EndGame();
             Explode();
 
 

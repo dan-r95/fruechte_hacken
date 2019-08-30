@@ -74,17 +74,26 @@ public class HintManager : MonoBehaviour
 
     public void showMultiplierText()
     {
-        StartCoroutine(FlashLabel(multiplierText));
+        if (multiplierText != null)
+        {
+            StartCoroutine(FlashLabel(multiplierText));
+        }
     }
 
     public void showFrenzyText()
     {
-        StartCoroutine(FlashLabel(frenzyText));
+        if (multiplierText != null)
+        {
+            StartCoroutine(FlashLabel(frenzyText));
+        }
     }
 
     public void showSlowMoText()
     {
-        StartCoroutine(FlashLabel(freezeText));
+        if (multiplierText != null)
+        {
+            StartCoroutine(FlashLabel(freezeText));
+        }
     }
 
     public void showInfoText()

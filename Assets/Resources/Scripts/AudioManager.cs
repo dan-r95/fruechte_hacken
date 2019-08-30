@@ -4,7 +4,7 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
 
-    public AudioClip clip1, clip2, gong, explosion, special, backgroundMusic, clip3;
+    public AudioClip clip1, clip2, gong, explosion, special, backgroundMusic, clip3, backgroundFx;
     public AudioSource[] audiosources;
 
     System.Random r;
@@ -15,7 +15,12 @@ public class AudioManager : MonoBehaviour
         audiosources = GetComponents<AudioSource>();
         audiosources[0].clip = backgroundMusic;
         audiosources[0].Play();
-
+        // play background sound effects like rain
+        if (backgroundFx != null)
+        {
+            audiosources[2].clip = backgroundFx;
+            audiosources[2].Play();
+        }
         r = new System.Random();
     }
 

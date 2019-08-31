@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     StartButtonTimeMode button1;
     StartButtonSurvivalMode button2;
 
+    private int multiplier = 1;
+
     public int extralife;
     public int remaining_invulnarebility;
 
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour
     public GameObject healthStartPos1, healthStartPos2;
 
     HintManager hintManager;
+    FruitSpawn fruitSpawn;
 
     void Awake()
     {
@@ -42,6 +45,7 @@ public class GameManager : MonoBehaviour
         // Sync framerate to monitors refresh rate
         current = SceneManager.GetActiveScene();
         hintManager = FindObjectOfType<HintManager>();
+        fruitSpawn = FindObjectOfType<FruitSpawn>();
     }
     // Use this for initialization
     void Start()
@@ -156,9 +160,9 @@ public class GameManager : MonoBehaviour
             // dont display the header animation when game is started
             idleText = GameObject.Find("IdleText");
             // idleText.gameObject.SetActive(false);
-            FruitSpawn fruitspawn = FindObjectOfType<FruitSpawn>();
-            fruitspawn.isSurvialMode = false;
-            fruitspawn.newGame();
+
+            fruitSpawn.isSurvialMode = false;
+            fruitSpawn.newGame();
             addScore(-score);
             turn = 0;
             extralife = 0;
@@ -185,9 +189,34 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void enableFrenzyMode()
+    {
+        fruitSpawn.spawnlimit = 5;
+    }
+
+    public void disableFrenzyMode()
+    {
+        fruitSpawn.spawnlimit = 1;
+    }
+
+    public void enableSlowMo()
+    {
+        fruitSpawn.enableSlowMo();
+    }
+
+    public void disableSlowMo()
+    {
+        fruitSpawn.disableSlowMo();
+    }
+
+    public void setMultiplier(int i)
+    {
+        multiplier = i;
+    }
+
     public void addScore(int i)
     {
-        score += i;
+        score += (i * multiplier);
         scoreTxt.setScore(score);
     }
 

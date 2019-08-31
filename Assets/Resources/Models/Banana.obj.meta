@@ -8,6 +8,8 @@ ModelImporter:
     400000: //RootNode
     400002: Cylinder004
     2100000: Cylinder004Mat
+    2100002: 02___Default
+    2100004: 03___Default
     2300000: Cylinder004
     3300000: Cylinder004
     4300000: Cylinder004

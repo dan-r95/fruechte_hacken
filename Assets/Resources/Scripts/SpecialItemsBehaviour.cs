@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class SpecialItemsBehaviour : MonoBehaviour
 {
@@ -41,6 +42,32 @@ public class SpecialItemsBehaviour : MonoBehaviour
         fracturedObject.GetComponent<ExplodeItemScript>().ExplodeItem();
     }
 
+    public IEnumerator startActionBasedOnType()
+    {
+        manager = FindObjectOfType<GameManager>();
+        switch (gameObject.name)
+        {
+            case "Banana blue":
+                hintManager.showMultiplierText(); 
+                manager.setMultiplier(3);
+                yield return new WaitForSecondsRealtime(10f);
+                manager.setMultiplier(3);
+                break;
+            case "Banana ice":
+                hintManager.showSlowMoText();
+                manager.enableSlowMo();
+                yield return new WaitForSecondsRealtime(10f);
+                manager.disableSlowMo();
+                break;
+            case "Banana yellow":
+                hintManager.showFrenzyText(); 
+                manager.enableFrenzyMode();
+                yield return new WaitForSecondsRealtime(10f);
+                manager.disableFrenzyMode();
+                break;
+        }
+    }
+
     public void OnCollisionEnter(Collision collisionInfo)
     {
         Debug.Log(collisionInfo.collider.tag);
@@ -48,7 +75,6 @@ public class SpecialItemsBehaviour : MonoBehaviour
         {
             Debug.Log("Collided!");
             SpawnFracturedObject();
-            hintManager.showMultiplierText();
             audioManager.playSpecialSound();
             if (managerSurvival != null)
             {
@@ -57,9 +83,8 @@ public class SpecialItemsBehaviour : MonoBehaviour
             }
             else
             {
-                manager = FindObjectOfType<GameManager>();
-                //manager.showPowerUpBillboard();
-                // do something
+                StartCoroutine(startActionBasedOnType());
+
             }
 
             SpawnFracturedObject();

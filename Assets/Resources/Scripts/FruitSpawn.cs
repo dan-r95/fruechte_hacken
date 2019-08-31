@@ -18,7 +18,7 @@ public class FruitSpawn : MonoBehaviour
     public float startWaveTime = 2f;
     float waveTime;
     public float timeincrease = 0.04f;
-    int randindex,  spawnlimit;
+    int randindex;
     GameManager manager;
     GameManagerSurvival managerSurvival;
     bool[] spawnslotused;
@@ -26,9 +26,13 @@ public class FruitSpawn : MonoBehaviour
 
     public bool isSurvialMode = false;
 
+    public int spawnlimit;
+
+    float saveTimeScale;
+
     void Start()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 0.8f;
         StartCoroutine(StartGameAfterLoading());
 
     }
@@ -57,6 +61,19 @@ public class FruitSpawn : MonoBehaviour
         fruits.Add(orange);
         fruits.Add(peach);
         fruits.Add(banana);
+
+        spawnlimit = 1;
+    }
+
+    public void enableSlowMo(){
+        saveTimeScale = Time.timeScale;
+        Time.timeScale = 0.5f;
+    }
+
+    public void disableSlowMo(){
+        // also add the passed time to that ...
+        Time.timeScale = saveTimeScale;
+        saveTimeScale = 0;
     }
 
     // Update is called once per frame
@@ -111,7 +128,7 @@ public class FruitSpawn : MonoBehaviour
 
         GameObject activeFruit;
 
-        spawnlimit = 2;
+        
         if (isSurvialMode)
         {
             for (int i = 0; i <= managerSurvival.turn / 10 && i < spawnlimit; i++) //i represents the number of obstacles or items to spawn in a single wave

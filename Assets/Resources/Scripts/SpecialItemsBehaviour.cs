@@ -37,15 +37,16 @@ public class SpecialItemsBehaviour : MonoBehaviour
 
     public void SpawnFracturedObject()
     {
-        GameObject.Instantiate(fracturedFruit, gameObject.transform.position, transform.rotation);
+        GameObject fractObj = GameObject.Instantiate(fracturedFruit, gameObject.transform.position, transform.rotation);
         Destroy(gameObject);
-        if (gameObject.name == "bomb_ST6TPHC Variant")
+        Debug.Log(gameObject.name);
+        if (gameObject.name == "bomb_ST6TPHC Variant(Clone)" || gameObject.name == "asiabox(Clone)" )
         {
-            fracturedObject.GetComponent<ExplodeItemScript>().ExplodeItem();
+            fractObj.GetComponent<ExplodeItemScript>().ExplodeItem();
         }
         else
         {
-            fracturedObject.GetComponent<ExplodeFruitsScript>().ExplodeFruits();
+            fractObj.GetComponent<ExplodeFruitsScript>().ExplodeFruits();
         }
     }
 
@@ -53,20 +54,20 @@ public class SpecialItemsBehaviour : MonoBehaviour
     {
         manager = FindObjectOfType<GameManager>();
         Debug.Log(gameObject.name);
-          Color color = new Color(244,253,251);
+        Color color = new Color(244, 253, 251);
         switch (gameObject.name)
         {
             case "Banana NEW blue(Clone)":
-          
-            RenderSettings.fogColor = Color.blue;
+
+                RenderSettings.fogColor = Color.blue;
                 hintManager.showMultiplierText();
                 manager.setMultiplier(3);
                 yield return new WaitForSecondsRealtime(10f);
-                manager.setMultiplier(3);
+                manager.setMultiplier(1);
                 RenderSettings.fogColor = color;
                 break;
             case "Banana NEW ice(Clone)":
-                 RenderSettings.fogColor = Color.grey;
+                RenderSettings.fogColor = Color.grey;
                 hintManager.showSlowMoText();
                 manager.enableSlowMo();
                 yield return new WaitForSecondsRealtime(10f);

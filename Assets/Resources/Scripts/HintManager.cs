@@ -14,6 +14,8 @@ public class HintManager : MonoBehaviour
 
     public GameObject scoreText, score;
 
+    public GameObject yourScore;
+
     private bool displayLabel = false;
 
     void Start()
@@ -64,9 +66,12 @@ public class HintManager : MonoBehaviour
             {
                 obj.SetActive(true);
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSecondsRealtime(0.5f);
             i++;
-            if (i > 20) break;
+            if (i > 20)
+            {
+                obj.SetActive(false); break;
+            }
 
         }
     }
@@ -121,6 +126,19 @@ public class HintManager : MonoBehaviour
         deactivateText(parms);
     }
 
+    public void toggleYourPointsTxt()
+    {
+        object[] parms = new object[1] { yourScore };
+        if (yourScore.activeInHierarchy)
+        {
+            deactivateText(parms);
+        }
+        else
+        {
+            activateText(parms);
+        }
+
+    }
 
     void activateText(object[] objects)
     {

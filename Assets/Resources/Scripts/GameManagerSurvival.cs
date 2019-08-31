@@ -221,9 +221,9 @@ public class GameManagerSurvival : MonoBehaviour
     public void EndGame()
     {
         runningGame = false;
-        headlineTxt.changeState(true);
-        //button1.transform.position = new Vector3(0.5f, 1.5f, -1.75f);
+        hintManager.toggleYourPointsTxt();
         gameOverText.SetActive(true);
+
         // add button to get back to the main menu
         Vector3 pos = new Vector3(-1.2f, 1f, 0f);
         GameObject gong = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/gong backToMain Variant"), pos, Quaternion.Euler(0, 90, 0));

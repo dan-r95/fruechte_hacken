@@ -72,6 +72,7 @@ public class FruitSpawn : MonoBehaviour
 
     public void disableSlowMo(){
         // also add the passed time to that ...
+        Debug.Log(saveTimeScale);
         Time.timeScale = saveTimeScale;
         saveTimeScale = 0;
     }

@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     public GameObject avatar;
 
     public GameObject startPos;
-    public GameObject healthStartPos1, healthStartPos2;
+    public GameObject healthStartPos1, healthStartPos2, healthStartPos3;
 
     HintManager hintManager;
     FruitSpawn fruitSpawn;
@@ -98,9 +98,13 @@ public class GameManager : MonoBehaviour
         Debug.Log("nextplacement" + nextPlacement);
         Vector3 pos;
         Debug.Log(next);
-        if (next > 122)
+        if (next > 70)
         {
             pos = new Vector3(healthStartPos1.transform.position.x, healthStartPos1.transform.position.y, healthStartPos1.transform.position.z);
+        }
+        else if (next > 150)
+        {
+            pos = new Vector3(healthStartPos3.transform.position.x, healthStartPos3.transform.position.y, healthStartPos3.transform.position.z); ;
         }
         else
         {
@@ -143,8 +147,6 @@ public class GameManager : MonoBehaviour
             case 2: banana = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana NEW yellow"), pos, transform.rotation); break;
         }
         banana.gameObject.layer = Random.Range(10, 16);
-        Debug.Log("spawn bananana");
-        Debug.Log(banana.gameObject.layer);
         return banana;
     }
 
@@ -154,19 +156,15 @@ public class GameManager : MonoBehaviour
         if (current.name != "SurvivalMode" && current.name != "Main Menu")
         {
             Debug.Log("NEW  GAME(Time)");
-            if (headlineTxt != null)
-            {
-                headlineTxt.changeState(false);
-            }
-            // dont display the header animation when game is started
-            idleText = GameObject.Find("IdleText");
 
+            // dont display the header animation when game is started
+            hintManager.toggleYourPointsTxt();
             fruitSpawn.isSurvialMode = false;
             fruitSpawn.newGame();
             addScore(-score);
             turn = 0;
             extralife = 0;
-            setExtralife(10);
+            setExtralife(100);
             TimeManager timeManager = FindObjectOfType<TimeManager>();
             timeManager.startTimer();
             runningGame = true;
@@ -212,7 +210,7 @@ public class GameManager : MonoBehaviour
 
     public void disableSlowMo()
     {
-         slowMoEnabled = false;
+        slowMoEnabled = false;
         fruitSpawn.disableSlowMo();
     }
 
@@ -283,7 +281,7 @@ public class GameManager : MonoBehaviour
     {
         runningGame = false;
         headlineTxt.changeState(true);
-        //button1.transform.position = new Vector3(0.5f, 1.5f, -1.75f);
+        hintManager.toggleYourPointsTxt();
         gameOverText.SetActive(true);
         // add button to get back to the main menu
 

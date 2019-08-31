@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     HintManager hintManager;
     FruitSpawn fruitSpawn;
 
+    bool slowMoEnabled;
+
     void Awake()
     {
         scoreTxt = FindObjectOfType<ScoreScript>();
@@ -84,7 +86,6 @@ public class GameManager : MonoBehaviour
 
     public void spawnPowerUp()
     {
-        hintManager.showFrenzyText();
         GameObject target0 = GameObject.Find("end"); //GameObject.Find("end");
         GameObject target1 = GameObject.Find("end (1)");//GameObject.Find("end (1)");
         GameObject target2 = GameObject.Find("end (2)"); //GameObject.Find("end (2)");
@@ -92,12 +93,12 @@ public class GameManager : MonoBehaviour
         // on motion detection spawn health item
 
         Debug.Log("spawning new powerup");
-        int next = Random.Range(0, 1);
+        int next = Random.Range(0, 255);
         int nextPlacement = Random.Range(0, 2);
         Debug.Log("nextplacement" + nextPlacement);
         Vector3 pos;
         Debug.Log(next);
-        if (next == 1)
+        if (next > 122)
         {
             pos = new Vector3(healthStartPos1.transform.position.x, healthStartPos1.transform.position.y, healthStartPos1.transform.position.z);
         }
@@ -137,9 +138,9 @@ public class GameManager : MonoBehaviour
         GameObject banana = new GameObject();
         switch (nextPlacement)
         {
-            case 0: banana = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana yellow"), pos, transform.rotation); break;
-            case 1: banana = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana ice"), pos, transform.rotation); break;
-            case 2: banana = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana blue"), pos, transform.rotation); break;
+            case 0: banana = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana NEW blue"), pos, transform.rotation); break;
+            case 1: banana = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana NEW ice"), pos, transform.rotation); break;
+            case 2: banana = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/Banana NEW yellow"), pos, transform.rotation); break;
         }
         banana.gameObject.layer = Random.Range(10, 16);
         Debug.Log("spawn bananana");
@@ -159,7 +160,6 @@ public class GameManager : MonoBehaviour
             }
             // dont display the header animation when game is started
             idleText = GameObject.Find("IdleText");
-            // idleText.gameObject.SetActive(false);
 
             fruitSpawn.isSurvialMode = false;
             fruitSpawn.newGame();
@@ -181,12 +181,17 @@ public class GameManager : MonoBehaviour
         while (runningGame)
         {
             Debug.Log("Waiting");
-            yield return new WaitForSecondsRealtime(5.5f);
+            yield return new WaitForSecondsRealtime(10f);
             spawnPowerUp();
             Debug.Log("done spawn");
-            yield return new WaitForSecondsRealtime(5.5f);
+            yield return new WaitForSecondsRealtime(15f);
             Debug.Log("done wait 2");
         }
+    }
+
+    public bool isSlowMoEnabled()
+    {
+        return slowMoEnabled;
     }
 
     public void enableFrenzyMode()
@@ -201,11 +206,13 @@ public class GameManager : MonoBehaviour
 
     public void enableSlowMo()
     {
+        slowMoEnabled = true;
         fruitSpawn.enableSlowMo();
     }
 
     public void disableSlowMo()
     {
+         slowMoEnabled = false;
         fruitSpawn.disableSlowMo();
     }
 

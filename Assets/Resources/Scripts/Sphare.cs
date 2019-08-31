@@ -19,7 +19,7 @@ public class Sphare : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         cf = GetComponent<ConstantForce>();
-        rb.AddForce(10f, 0, 0);
+        rb.AddForce(7f, 0, 0);
     }
 
     // Update is called once per frame

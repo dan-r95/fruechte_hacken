@@ -77,6 +77,7 @@
      <Compile Include="Assets\Resources\Scripts\SaveAndLoad.cs" />
      <Compile Include="Assets\Resources\Scripts\ScoreManager.cs" />
      <Compile Include="Assets\Resources\Scripts\ScoreScript.cs" />
+     <Compile Include="Assets\Resources\Scripts\SelfDestructScript.cs" />
      <Compile Include="Assets\Resources\Scripts\SequentialAnimator.cs" />
      <Compile Include="Assets\Resources\Scripts\SetAlpha.cs" />
      <Compile Include="Assets\Resources\Scripts\ShowSplashImageCanvas.cs" />
@@ -89,7 +90,6 @@
      <Compile Include="Assets\Resources\Scripts\ThrowArcLike.cs" />
      <Compile Include="Assets\Resources\Scripts\TimeManager.cs" />
      <None Include="Assets\EffectExamples\Shared\Shaders\SurfaceShader_VC.shader" />
-     <None Include="Assets\README - controls.txt" />
      <None Include="Assets\Resources\Fonts\Read Me If You Feel Like It.txt" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/dross/Documents/fruechte_hacken/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

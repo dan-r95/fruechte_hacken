@@ -32,3 +32,4 @@ Weiteres:
 - Der Spieler muss die Früchte mit seinen Händen oder Füssen zerstören, mit einem Messer.
 - Im Hauptmenü kann man sich für einen Spielmodi entscheiden.
 - Animierte Texte mit Idle und GameOver Texten.
+- Angepasst an 1080p, 16:9f

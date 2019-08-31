@@ -15,7 +15,7 @@ public class TimeManager : MonoBehaviour
 
     void Start()
     {
-
+        manager = FindObjectOfType<GameManager>();
     }
     public void startTimer()
     {
@@ -23,8 +23,6 @@ public class TimeManager : MonoBehaviour
         //Initialize timer with 1 second intervals
         Time.timeScale = 1; //Just making sure that the timeScale is right
         StartCoroutine(CountDownToZero());
-
-
     }
 
 
@@ -34,7 +32,14 @@ public class TimeManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSecondsRealtime(1);
+            if (manager.isSlowMoEnabled())
+            {
+                yield return new WaitForSecondsRealtime(2);
+            }
+            else
+            {
+                yield return new WaitForSecondsRealtime(1);
+            }
             timeLeft--;
             if (timeLeft == 0)
             {

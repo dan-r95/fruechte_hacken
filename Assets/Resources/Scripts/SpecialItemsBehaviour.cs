@@ -39,31 +39,47 @@ public class SpecialItemsBehaviour : MonoBehaviour
     {
         GameObject.Instantiate(fracturedFruit, gameObject.transform.position, transform.rotation);
         Destroy(gameObject);
-        fracturedObject.GetComponent<ExplodeItemScript>().ExplodeItem();
+        if (gameObject.name == "bomb_ST6TPHC Variant")
+        {
+            fracturedObject.GetComponent<ExplodeItemScript>().ExplodeItem();
+        }
+        else
+        {
+            fracturedObject.GetComponent<ExplodeFruitsScript>().ExplodeFruits();
+        }
     }
 
     public IEnumerator startActionBasedOnType()
     {
         manager = FindObjectOfType<GameManager>();
+        Debug.Log(gameObject.name);
+          Color color = new Color(244,253,251);
         switch (gameObject.name)
         {
-            case "Banana blue":
-                hintManager.showMultiplierText(); 
+            case "Banana NEW blue(Clone)":
+          
+            RenderSettings.fogColor = Color.blue;
+                hintManager.showMultiplierText();
                 manager.setMultiplier(3);
                 yield return new WaitForSecondsRealtime(10f);
                 manager.setMultiplier(3);
+                RenderSettings.fogColor = color;
                 break;
-            case "Banana ice":
+            case "Banana NEW ice(Clone)":
+                 RenderSettings.fogColor = Color.grey;
                 hintManager.showSlowMoText();
                 manager.enableSlowMo();
                 yield return new WaitForSecondsRealtime(10f);
                 manager.disableSlowMo();
+                RenderSettings.fogColor = color;
                 break;
-            case "Banana yellow":
-                hintManager.showFrenzyText(); 
+            case "Banana NEW yellow(Clone)":
+                RenderSettings.fogColor = Color.yellow;
+                hintManager.showFrenzyText();
                 manager.enableFrenzyMode();
                 yield return new WaitForSecondsRealtime(10f);
                 manager.disableFrenzyMode();
+                RenderSettings.fogColor = color;
                 break;
         }
     }

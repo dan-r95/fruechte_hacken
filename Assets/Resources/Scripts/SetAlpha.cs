@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class SetAlpha : MonoBehaviour
 {
     Image image;
-    public float alpha=  0.9f;
+    public float alpha=  0.75f;
     // Start is called before the first frame update
     void Start()
     {

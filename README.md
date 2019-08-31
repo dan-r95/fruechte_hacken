@@ -23,13 +23,15 @@ Für das Modul FcA 2019. Unity Version: 2018.3.5f1
 * Survival Mode: Der Spieler hat 10 Leben und muss alle Früchte zerstören. Bomben, die zufällig spawnen muss er ausweichen, sonst GameOver!
  Über eine Geste, kann er 3 mal pro Spiel zusätzliche Items (noodle box) spawnen, die ihm extra Leben geben.
 
-Weiteres:
+### Im Detail:
 
 - Das Spiel hat nun Background Music und Sound Effekte.
 - Die Frucht Explosionen wurden überarbeitet und verschoenert.
 - Alle Special Items haben zusätzliche Partikelsysteme, darunter Eisregen, gezündete Lunte, Feuerregen, Rauch, Feuer, Explosion.
 - Dazu zählen: Bombe, Noodle Box, Eisbanane, Feuerbanane, Wasserbanane, Lagerfeuer.
-- Der Spieler muss die Früchte mit seinen Händen oder Füssen zerstören, mit einem Messer.
+- Sand und Regeneffekte.
+- Der Spieler muss die Früchte mit seinen Händen oder Füssen zerstören (Messer).
 - Im Hauptmenü kann man sich für einen Spielmodi entscheiden.
 - Animierte Texte mit Idle und GameOver Texten.
 - Angepasst an 1080p, 16:9f
+- Spawnen von Special Items funktioniert über Ausführen einer Geste, dies kann der Spieler 3 mal im Survivalmode machen. 

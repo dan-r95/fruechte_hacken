@@ -73,6 +73,7 @@
      <Compile Include="Assets\Resources\Scripts\MoCapAnsteuerung.cs" />
      <Compile Include="Assets\Resources\Scripts\MoCapUtils.cs" />
      <Compile Include="Assets\Resources\Scripts\NameField.cs" />
+     <Compile Include="Assets\Resources\Scripts\Obstacle.cs" />
      <Compile Include="Assets\Resources\Scripts\OMUnityPlugin.cs" />
      <Compile Include="Assets\Resources\Scripts\SaveAndLoad.cs" />
      <Compile Include="Assets\Resources\Scripts\ScoreManager.cs" />
@@ -84,7 +85,6 @@
      <Compile Include="Assets\Resources\Scripts\SignMove.cs" />
      <Compile Include="Assets\Resources\Scripts\SpawnFracturedScript.cs" />
      <Compile Include="Assets\Resources\Scripts\SpecialItemsBehaviour.cs" />
-     <Compile Include="Assets\Resources\Scripts\Sphare.cs" />
      <Compile Include="Assets\Resources\Scripts\StartButtonSurvivalMode.cs" />
      <Compile Include="Assets\Resources\Scripts\StartButtonTimeMode.cs" />
      <Compile Include="Assets\Resources\Scripts\ThrowArcLike.cs" />

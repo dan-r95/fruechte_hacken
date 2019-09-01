@@ -24,8 +24,6 @@ public class ThrowArcLike : MonoBehaviour
 
     void Update()
     {
-       /*  if (Input.GetKey(KeyCode.X))
-            StartCoroutine(SimulateProjectile()); */
         if (shouldRotate)
         {
             Projectile.Rotate(new Vector3(0, 0, 0.8f));
@@ -36,8 +34,10 @@ public class ThrowArcLike : MonoBehaviour
 
     public IEnumerator SimulateProjectile()
     {
-        while (Projectile.transform != null)
+        while ( Projectile != null)// &&|| Projectile != null
         {
+            if(transform == null)
+                break;
             // Short delay added before Projectile is thrown
             yield return new WaitForSecondsRealtime(0.5f);
 
@@ -62,7 +62,7 @@ public class ThrowArcLike : MonoBehaviour
 
             float elapse_time = 0;
 
-            while (elapse_time < flightDuration)
+            while (elapse_time < flightDuration && Projectile != null)
             {
                 Projectile.Translate(0, (Vy - (gravity * elapse_time)) * Time.deltaTime, Vx * Time.deltaTime);
                 //Projectile.Rotate()
@@ -72,27 +72,32 @@ public class ThrowArcLike : MonoBehaviour
                 yield return null;
             }
             // return to initital position
-            Projectile.position = myTransform.position + new Vector3(0, 0.0f, 0);
+            if (Projectile != null)
+                Projectile.position = myTransform.position + new Vector3(0, 0.0f, 0);
 
             /* if (elapse_time >= 2 * flightDuration)
             {
                 this.enabled = false;
             } */
-            if (gameObject == null && !gameObject.activeInHierarchy)
-            {
-                StopAllCoroutines();
-            }
-              if (Projectile.gameObject == null && !Projectile.gameObject.activeInHierarchy)
-             {
-                 StopAllCoroutines();
-             } 
+            // if (gameObject == null && !gameObject.activeInHierarchy)
+            // {
+            //     StopAllCoroutines();
+            // }
+            // if (Projectile.gameObject == null && !Projectile.gameObject.activeInHierarchy)
+            // {
+            //     StopAllCoroutines();
+            // }
         }
+        //this.enabled = false;
+        //gameObject.SetActive(false);
     }
 
     private void OnDestroy()
     {
         Debug.Log("Getting destroyed :/");
+        StopCoroutine(SimulateProjectile());
         this.enabled = false;
-        StopAllCoroutines();
+        gameObject.SetActive(false);
+
     }
 }

@@ -39,7 +39,6 @@ public class SpecialItemsBehaviour : MonoBehaviour
     {
         GameObject fractObj = GameObject.Instantiate(fracturedFruit, gameObject.transform.position, transform.rotation);
         Destroy(gameObject);
-        Debug.Log(gameObject.name);
         if (gameObject.name == "bomb_ST6TPHC Variant(Clone)" || gameObject.name == "asiabox(Clone)" )
         {
             fractObj.GetComponent<ExplodeItemScript>().ExplodeItem();
@@ -53,7 +52,6 @@ public class SpecialItemsBehaviour : MonoBehaviour
     public IEnumerator startActionBasedOnType()
     {
         manager = FindObjectOfType<GameManager>();
-        Debug.Log(gameObject.name);
         Color color = new Color(244, 253, 251);
         switch (gameObject.name)
         {

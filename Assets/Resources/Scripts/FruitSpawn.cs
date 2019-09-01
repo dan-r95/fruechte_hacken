@@ -32,7 +32,7 @@ public class FruitSpawn : MonoBehaviour
 
     void Start()
     {
-        Time.timeScale = 0.8f;
+        Time.timeScale = 1f;
         StartCoroutine(StartGameAfterLoading());
 
     }
@@ -72,8 +72,7 @@ public class FruitSpawn : MonoBehaviour
 
     public void disableSlowMo(){
         // also add the passed time to that ...
-        Debug.Log(saveTimeScale);
-        Time.timeScale = saveTimeScale;
+        Time.timeScale = 1;
         saveTimeScale = 0;
     }
 
@@ -88,7 +87,7 @@ public class FruitSpawn : MonoBehaviour
                 {
                     SpawnColliders();
                     spawnTime += waveTime;
-                    Time.timeScale += timeincrease;
+                    //Time.timeScale += timeincrease;
                 }
             }
         }
@@ -100,7 +99,7 @@ public class FruitSpawn : MonoBehaviour
                 {
                     SpawnColliders();
                     spawnTime += waveTime;
-                    Time.timeScale += timeincrease;
+                   // Time.timeScale += timeincrease;
                 }
             }
         }
@@ -137,8 +136,7 @@ public class FruitSpawn : MonoBehaviour
                 randindex = Random.Range(0, spawnslotused.Length);
                 // use a different fruit each time
                 activeFruit = fruits[Random.Range(0, fruits.Count)];
-                Debug.Log(activeFruit.ToString());
-                activeFruit.GetComponent<Sphare>().isSurivalMode = true;
+                activeFruit.GetComponent<Obstacle>().isSurivalMode = true;
                 // set to random to layer to minimize colliding chance
                 activeFruit.gameObject.layer = Random.Range(10, 16);
                 Instantiate(activeFruit, spawnPoint[randindex].position, Quaternion.identity);
@@ -156,7 +154,7 @@ public class FruitSpawn : MonoBehaviour
                 // use a different fruit each time
                 activeFruit = fruits[Random.Range(0, fruits.Count)];
                 Instantiate(activeFruit, spawnPoint[randindex].position, Quaternion.identity);
-                activeFruit.GetComponent<Sphare>().isSurivalMode = false;
+                activeFruit.GetComponent<Obstacle>().isSurivalMode = false;
                 Instantiate(activeFruit, spawnPoint[randindex].position, Quaternion.identity);
                 spawnlimit++;
                 spawnslotused[randindex] = 1;

@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
+        Debug.Log("loaded level");
         // Turn off v-sync
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
@@ -68,7 +70,7 @@ public class GameManager : MonoBehaviour
         if (remaining_invulnarebility > 0)
             remaining_invulnarebility--;
         if (runningGame)
-            Time.timeScale += 0.000001f; //speeding up the game
+            Time.timeScale += 0.0001f; //speeding up the game
     }
 
     private IEnumerator StartGameAfterLoading()
@@ -95,9 +97,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("spawning new powerup");
         int next = Random.Range(0, 255);
         int nextPlacement = Random.Range(0, 2);
-        Debug.Log("nextplacement" + nextPlacement);
         Vector3 pos;
-        Debug.Log(next);
         if (next > 70)
         {
             pos = new Vector3(healthStartPos1.transform.position.x, healthStartPos1.transform.position.y, healthStartPos1.transform.position.z);
@@ -288,6 +288,7 @@ public class GameManager : MonoBehaviour
         Vector3 pos = new Vector3(-1.2f, 1f, 0f);
         GameObject gong = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/gong backToMain Variant"), pos, Quaternion.Euler(0, 90, 0));
         gong.transform.localScale = new Vector3(0.07f, 0.07f, 0.07f);
+        Time.timeScale = 1;
     }
 
 }

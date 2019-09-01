@@ -155,7 +155,7 @@ public class GameManagerSurvival : MonoBehaviour
             addScore(-score);
             turn = 0;
             extralife = 0;
-            setExtralife(10);
+            setExtralife(15);
             runningGame = true;
             Time.timeScale = 1;
             StartCoroutine(spawnBombs());
@@ -228,6 +228,7 @@ public class GameManagerSurvival : MonoBehaviour
         Vector3 pos = new Vector3(-1.2f, 1f, 0f);
         GameObject gong = (GameObject)GameObject.Instantiate(Resources.Load("Prefabs/gong backToMain Variant"), pos, Quaternion.Euler(0, 90, 0));
         gong.transform.localScale = new Vector3(0.07f, 0.07f, 0.07f);
+        Time.timeScale = 1;
 
     }
 }

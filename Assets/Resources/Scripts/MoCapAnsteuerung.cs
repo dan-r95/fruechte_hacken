@@ -49,6 +49,9 @@ public class MoCapAnsteuerung : MonoBehaviour
     private GameObject hat, knife1, knife2;
     bool jumpEnabled = true;
 
+    GameManager gameManager;
+    GameManagerSurvival managerSurvival;
+
     public void Awake()
     {
         bones = new Transform[21];
@@ -74,6 +77,9 @@ public class MoCapAnsteuerung : MonoBehaviour
         bones[18] = _18LeftUpperArm;
         bones[19] = _19LeftLowerArm;
         bones[20] = _20LeftHand;
+
+        managerSurvival = FindObjectOfType<GameManagerSurvival>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     void Start()
@@ -299,6 +305,21 @@ public class MoCapAnsteuerung : MonoBehaviour
             Vector3 pos2 = new Vector3(sphere[20].transform.position.x, sphere[20].transform.position.y, sphere[20].transform.position.z);
             knife2.transform.position = pos2;
             knife2.transform.rotation = sphere[20].transform.localRotation; */
+
+            Vector3 leftArm = MoCapUtils.GetPosition (matrix [15]);
+            Vector3 rightArm = MoCapUtils.GetPosition (matrix [20]);
+            Vector3 head = MoCapUtils.GetPosition (matrix [10]);
+            float dist1 = (leftArm - rightArm).magnitude;
+            float dist2 = (leftArm -head).magnitude;
+            float dist3 = (rightArm - head).magnitude;
+            if (dist1 > 10f && dist2 > 10f && dist3 > 10f){
+                if (gameManager != null){
+                    gameManager.spawnPowerUp();
+                }
+                else {
+                    StartCoroutine(managerSurvival.spawnHealthItems());
+                }
+            }
         }
 
 
